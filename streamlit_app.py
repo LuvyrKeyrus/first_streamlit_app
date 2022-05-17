@@ -1,3 +1,4 @@
+from tkinter.ttk import Separator
 import streamlit
 import pandas
 
@@ -9,7 +10,7 @@ streamlit.text('🐔 Hard-Boiled Free-Range Egg')
 streamlit.text('🥑🍞 Avocado Toast')
 
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
-my_fruit_list = pandas.read_csv("Repas.csv")
+my_fruit_list = pandas.read_csv("Repas.csv",Separator=";")
 #my_fruit_list = my_fruit_list.set_index('plats')
 
 #fruits_selected = streamlit.multiselect("Pick some fruits :")#,list(my_fruit_list.index))
