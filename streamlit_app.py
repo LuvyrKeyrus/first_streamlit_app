@@ -10,12 +10,14 @@ streamlit.text('🥑🍞 Avocado Toast')
 
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 my_fruit_list = pandas.read_csv("Repas.csv")
-my_fruit_list = my_fruit_list.set_index('plats')
+#my_fruit_list = my_fruit_list.set_index('plats')
 
-fruits_selected = streamlit.multiselect("Pick some fruits :",list(my_fruit_list.index))
-fruits_to_show=my_fruit_list.loc[fruits_selected]
+fruits_selected = streamlit.multiselect("Pick some fruits :")#,list(my_fruit_list.index))
+
 streamlit.dataframe(my_fruit_list)
   
+
+fruits_to_show=my_fruit_list.loc[fruits_selected]
 streamlit.header('🍌🥭 Selected fruits 🥝🍇')
 streamlit.dataframe(fruits_to_show)
 csv = fruits_to_show.to_csv().encode('utf-8')
