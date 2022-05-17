@@ -18,3 +18,11 @@ streamlit.dataframe(my_fruit_list)
   
 streamlit.header('🍌🥭 Selected fruits 🥝🍇')
 streamlit.dataframe(fruits_to_show)
+csv = fruits_to_show.to_csv().encode('utf-8')
+
+streamlit.download_button(
+     label="Download data as CSV",
+     data=csv,
+     file_name='fruits_to_show.csv',
+     mime='text/csv',
+ )
