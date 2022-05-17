@@ -18,5 +18,3 @@ streamlit.dataframe(my_fruit_list)
   
 streamlit.header('🍌🥭 Selected fruits 🥝🍇')
 streamlit.dataframe(fruits_to_show)
-
-streamlit.bar_chart(fruits_to_show)
