@@ -18,3 +18,5 @@ streamlit.dataframe(my_fruit_list)
   
 streamlit.header('🍌🥭 Selected fruits 🥝🍇')
 streamlit.dataframe(fruits_to_show)
+
+streamlit.map(fruits_to_show)
