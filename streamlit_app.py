@@ -9,7 +9,7 @@ streamlit.text('🐔 Hard-Boiled Free-Range Egg')
 streamlit.text('🥑🍞 Avocado Toast')
 
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
-my_fruit_list = pandas.read_csv("Repas.csv", sep='; ', delimiter=None,index_col='plats')
+my_fruit_list = pandas.read_csv("Repas.csv", sep='; ')
 #my_fruit_list = my_fruit_list.set_index('plats')
 
 #fruits_selected = streamlit.multiselect("Pick some fruits :")#,list(my_fruit_list.index))
