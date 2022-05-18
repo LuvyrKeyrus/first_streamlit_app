@@ -18,8 +18,21 @@ st.dataframe(meals_to_show)
 liste_courses=pd.DataFrame(columns=['Ingrédient','Quantité','Unité'])
 st.header('Ingredients choisis')
 for i in range(len(meals_selected)):
-    #for i in range (1,30):
-    liste_courses['Ingrédient'] = meals_selected['ingrédient_1']
+    for y in range (1,10):
+
+        ingredient_col = 'ingrédient_'+ str(y)
+        quantite_col = 'quantite_ingredient_'+ str(y)
+        unite_col = 'unité_mesure_ingredient_'+ str(y)
+
+        ingredient_val = meals_selected.loc[i,[ingredient_col]]
+        quantite_val = meals_selected.loc[i,[quantite_col]]
+        unite_val = meals_selected.loc[i,[unite_col]]
+
+        if ingredient_val in liste_courses.values :
+            temp_index = liste_courses.index[(liste_courses['Ingrédient'] == ingredient_val)]
+            liste_courses.set_value(temp_index,'Quantité',liste_courses.loc[temp_index,['Quantité']] + quantite_val )
+        else :
+            liste_courses.append({'Ingrédient':ingredient_val,'Quantité':quantite_val,'Unité':unite_val}, ignore_index=True)
 
 st.dataframe(liste_courses)
 
