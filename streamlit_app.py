@@ -29,9 +29,9 @@ for i in range(len(meals_to_show)):
         unite_col = 'unité_mesure_ingredient_'+ str(y)
         st.text(unite_col)
 
-        ingredient_val = meals_to_show.loc[i,[ingredient_col]]
-        quantite_val = meals_to_show.loc[i,[quantite_col]]
-        unite_val = meals_to_show.loc[i,[unite_col]]
+        ingredient_val = meals_to_show.loc[i:,[ingredient_col]]
+        quantite_val = meals_to_show.loc[i:,[quantite_col]]
+        unite_val = meals_to_show.loc[i:,[unite_col]]
 
         if ingredient_val in liste_courses.values :
             temp_index = liste_courses.index[(liste_courses['Ingrédient'] == ingredient_val)]
