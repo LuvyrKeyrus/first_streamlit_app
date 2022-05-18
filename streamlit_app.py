@@ -11,9 +11,10 @@ meals_selected = st.multiselect("Pick some meals :",list(my_meal_list.index))
 st.dataframe(my_meal_list)
   
 
-meals_to_show=my_meal_list.loc[meals_selected]
+meals_to_show1=my_meal_list.loc[meals_selected]
+meals_to_show=pd.DataFrame(meals_to_show1)
 st.header('Repas choisis')
-st.dataframe(meals_to_show)
+st.dataframe(meals_to_show1)
 
 liste_courses=pd.DataFrame(columns=['Ingrédient','Quantité','Unité'])
 st.header('Ingredients choisis')
