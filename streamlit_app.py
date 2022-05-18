@@ -29,10 +29,10 @@ for i in range(len(meals_to_show)):
         unite_col = 'unité_mesure_ingredient_'+ str(y)
         st.text(unite_col)
 
-        ingredient_val = meals_to_show.loc[i,ingredient_col]
-        quantite_val = meals_to_show.loc[i,quantite_col]
-        unite_val = meals_to_show.loc[i,unite_col]
-
+        ingredient_val = meals_to_show.at[i,ingredient_col]
+        quantite_val = meals_to_show.at[i,quantite_col]
+        unite_val = meals_to_show.at[i,unite_col]
+        #todo check de null avants intégrations au df de la liste de course
         if ingredient_val in liste_courses.values :
             temp_index = liste_courses.index[(liste_courses['Ingrédient'] == ingredient_val)]
             liste_courses.set_value(temp_index,'Quantité',liste_courses.loc[temp_index,['Quantité']] + quantite_val )
