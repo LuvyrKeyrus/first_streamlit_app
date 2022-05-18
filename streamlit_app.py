@@ -23,14 +23,10 @@ liste_index = meals_to_show.index
 st.text(liste_index)
 for i in range(len(liste_index)):
     st.text(liste_index[i])
-    for y in range (1,10):
-        print ('y =',y)
+    for y in range (1,11):
         ingredient_col = 'ingrédient_'+ str(y)
-        st.text(ingredient_col)
         quantite_col = 'quantite_ingredient_'+ str(y)
-        st.text(quantite_col)
         unite_col = 'unité_mesure_ingredient_'+ str(y)
-        st.text(unite_col)
 
         ingredient_val = meals_to_show.loc[liste_index[i],ingredient_col]
         quantite_val = meals_to_show.loc[liste_index[i],quantite_col]
