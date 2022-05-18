@@ -31,6 +31,7 @@ for i in range(len(liste_index)):
         ingredient_val = meals_to_show.loc[liste_index[i],ingredient_col]
         quantite_val = meals_to_show.loc[liste_index[i],quantite_col]
         unite_val = meals_to_show.loc[liste_index[i],unite_col]
+        st.text(ingredient_val,quantite_val,unite_val)
         #todo check de null avants intégrations au df de la liste de course
         if meals_to_show.loc[liste_index[i],ingredient_col] is not None :
             if ingredient_val in liste_courses.values :
