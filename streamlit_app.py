@@ -18,6 +18,9 @@ st.dataframe(meals_to_show)
 st.text(type(meals_to_show))
 liste_courses=pd.DataFrame(columns=['Ingrédient','Quantité','Unité'])
 st.header('Ingredients choisis')
+
+liste_index = meals_to_show.index
+st.text(liste_index)
 for i in range(len(meals_to_show)):
     print ('i=',i)
     for y in range (1,10):
@@ -29,9 +32,9 @@ for i in range(len(meals_to_show)):
         unite_col = 'unité_mesure_ingredient_'+ str(y)
         st.text(unite_col)
 
-        ingredient_val = meals_to_show.at[i,[ingredient_col]]
-        quantite_val = meals_to_show.at[i,[quantite_col]]
-        unite_val = meals_to_show.at[i,[unite_col]]
+        ingredient_val = meals_to_show.at[i,ingredient_col]
+        quantite_val = meals_to_show.at[i,quantite_col]
+        unite_val = meals_to_show.at[i,unite_col]
         #todo check de null avants intégrations au df de la liste de course
         if ingredient_val in liste_courses.values :
             temp_index = liste_courses.index[(liste_courses['Ingrédient'] == ingredient_val)]
