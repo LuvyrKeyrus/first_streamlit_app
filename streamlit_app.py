@@ -18,7 +18,8 @@ st.dataframe(meals_to_show)
 liste_courses=pd.DataFrame(columns=['Ingrédient','Quantité','Unité'])
 st.header('Ingredients choisis')
 for i in range(len(meals_selected)):
-    st.dataframe(liste_courses)
+    #for i in range (1,30):
+    liste_courses.Ingrédient = meals_selected.ingredient_1
 
 st.dataframe(liste_courses)
 
