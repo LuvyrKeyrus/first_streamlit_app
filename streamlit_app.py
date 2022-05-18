@@ -1,3 +1,4 @@
+from numpy import NaN
 import streamlit as st
 import pandas as pd
 
@@ -31,15 +32,15 @@ for i in range(len(liste_index)):
         ingredient_val = meals_to_show.loc[liste_index[i],ingredient_col]
         quantite_val = meals_to_show.loc[liste_index[i],quantite_col]
         unite_val = meals_to_show.loc[liste_index[i],unite_col]
-        st.text(ingredient_val)
-        st.text(quantite_val)
-        st.text(unite_val)
         #todo check de null avants intégrations au df de la liste de course
-        if meals_to_show.loc[liste_index[i],ingredient_col] is not None :
+        if meals_to_show.loc[liste_index[i],ingredient_col] is not NaN :
+            st.text('on est ici')
             if ingredient_val in liste_courses.values :
+                st.text('on est la')
                 temp_index = liste_courses.index[(liste_courses['Ingrédient'] == ingredient_val)]
                 liste_courses.set_value(temp_index,'Quantité',liste_courses.loc[temp_index,['Quantité']] + quantite_val )
             else :
+                st.text('on est pas la')
                 liste_courses.append({'Ingrédient':ingredient_val,'Quantité':quantite_val,'Unité':unite_val}, ignore_index=True)
 
 st.dataframe(liste_courses)
