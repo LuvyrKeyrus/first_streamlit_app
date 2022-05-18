@@ -4,7 +4,7 @@ import pandas as pd
 st.title('Application de repas')
 st.header('Liste des repas')
 my_meal_list = pd.read_csv("Repas.csv", sep=';')
-my_meal_list = my_meal_list.set_index('plats')
+#my_meal_list = my_meal_list.set_index('plats')
 
 meals_selected = st.multiselect("Pick some meals :",list(my_meal_list.index))
 
