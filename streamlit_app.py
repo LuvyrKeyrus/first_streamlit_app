@@ -22,8 +22,11 @@ for i in range(len(meals_to_show)):
     for y in range (1,10):
         print ('y =',y)
         ingredient_col = 'ingrédient_'+ str(y)
+        st.text(ingredient_col)
         quantite_col = 'quantite_ingredient_'+ str(y)
+        st.text(quantite_col)
         unite_col = 'unité_mesure_ingredient_'+ str(y)
+        st.text(unite_col)
 
         ingredient_val = meals_to_show.loc[i,[ingredient_col]]
         quantite_val = meals_to_show.loc[i,[quantite_col]]
@@ -38,11 +41,11 @@ for i in range(len(meals_to_show)):
 st.dataframe(liste_courses)
 
 
-csv = meals_to_show.to_csv().encode('utf-8')
+csv = liste_courses.to_csv().encode('utf-8')
 
 st.download_button(
      label="Download data as CSV",
      data=csv,
-     file_name='meals_to_show.csv',
+     file_name='liste_courses.csv',
      mime='text/csv',
  )
