@@ -21,8 +21,8 @@ st.header('Ingredients choisis')
 
 liste_index = meals_to_show.index
 st.text(liste_index)
-for i in range(len(meals_to_show)):
-    print ('i=',i)
+for i in range(len(liste_index)):
+    st.text(liste_index[i])
     for y in range (1,10):
         print ('y =',y)
         ingredient_col = 'ingrédient_'+ str(y)
