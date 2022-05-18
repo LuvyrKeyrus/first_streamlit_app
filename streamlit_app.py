@@ -15,7 +15,7 @@ meals_to_show=my_meal_list.loc[meals_selected]
 st.header('repas choisis')
 st.dataframe(meals_to_show)
 
-liste_courses=pd.DataFrame({"Date","Quantité","Unité"})
+liste_courses=pd.DataFrame(columns=['Date','Quantité','Unité'])
 st.header('ingredients choisis')
 for i in range(len(meals_selected)):
     st.dataframe(liste_courses)
