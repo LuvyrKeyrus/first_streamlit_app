@@ -17,16 +17,16 @@ st.dataframe(meals_to_show)
 
 liste_courses=pd.DataFrame(columns=['Ingrédient','Quantité','Unité'])
 st.header('Ingredients choisis')
-for i in range(len(meals_selected)):
+for i in range(len(meals_to_show)):
     for y in range (1,10):
 
         ingredient_col = 'ingrédient_'+ str(y)
         quantite_col = 'quantite_ingredient_'+ str(y)
         unite_col = 'unité_mesure_ingredient_'+ str(y)
 
-        ingredient_val = meals_selected.loc[i,[ingredient_col]]
-        quantite_val = meals_selected.loc[i,[quantite_col]]
-        unite_val = meals_selected.loc[i,[unite_col]]
+        ingredient_val = meals_to_show.loc[i,[ingredient_col]]
+        quantite_val = meals_to_show.loc[i,[quantite_col]]
+        unite_val = meals_to_show.loc[i,[unite_col]]
 
         if ingredient_val in liste_courses.values :
             temp_index = liste_courses.index[(liste_courses['Ingrédient'] == ingredient_val)]
