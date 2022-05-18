@@ -18,8 +18,9 @@ st.dataframe(meals_to_show)
 liste_courses=pd.DataFrame(columns=['Ingrédient','Quantité','Unité'])
 st.header('Ingredients choisis')
 for i in range(len(meals_to_show)):
+    print ('i=',i)
     for y in range (1,10):
-
+        print ('y =',y)
         ingredient_col = 'ingrédient_'+ str(y)
         quantite_col = 'quantite_ingredient_'+ str(y)
         unite_col = 'unité_mesure_ingredient_'+ str(y)
