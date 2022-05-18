@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
 
-st.title('application de repas')
-st.header('liste des repas')
+st.title('Application de repas')
+st.header('Liste des repas')
 my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
 
@@ -12,15 +12,15 @@ st.dataframe(my_meal_list)
   
 
 meals_to_show=my_meal_list.loc[meals_selected]
-st.header('repas choisis')
+st.header('Repas choisis')
 st.dataframe(meals_to_show)
 
-liste_courses=pd.DataFrame(columns=['Date','Quantité','Unité'])
-st.header('ingredients choisis')
+liste_courses=pd.DataFrame(columns=['Ingrédient','Quantité','Unité'])
+st.header('Ingredients choisis')
 for i in range(len(meals_selected)):
     st.dataframe(liste_courses)
 
-
+st.dataframe(liste_courses)
 
 
 csv = meals_to_show.to_csv().encode('utf-8')
