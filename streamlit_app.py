@@ -47,7 +47,7 @@ for i in range(len(liste_index)):
 col2.dataframe(liste_courses)
 
 
-csv = liste_courses.to_csv().encode('utf-8')
+csv = liste_courses.to_csv(sep=';').encode('utf-8')
 
 st.download_button(
      label="Download data as CSV",
