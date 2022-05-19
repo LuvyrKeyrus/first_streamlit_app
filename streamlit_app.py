@@ -10,7 +10,7 @@ my_meal_list = my_meal_list.set_index('plats')
 meals_selected = st.multiselect("Pick some meals :",list(my_meal_list.index))
 
 st.dataframe(my_meal_list)
-
+st.text(st.session_state)
 
 meals_to_show=my_meal_list.loc[meals_selected]
 coltitre1, coltitre2 = st.columns(2)
