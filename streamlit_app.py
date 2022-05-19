@@ -24,11 +24,8 @@ liste_index = meals_to_show.index
 def aff_col_repas(index_select):
     if index_select not in st.session_state:
         st.session_state[index_select] = meals_to_show.loc[index_select,'quantite']
-    col1.number_input('',min_value=0, max_value=10,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
-    col1.text(index_select)
+    col1.number_input(index_select,min_value=0, max_value=10,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
     meals_to_show['quantite'][index_select] = st.session_state[index_select]
-    if meals_to_show['quantite'][index_select] == 0 :
-        del meals_selected[meals_selected.index(index_select)]
 
 for i in range(len(liste_index)):
     aff_col_repas(liste_index[i])
