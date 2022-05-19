@@ -34,9 +34,9 @@ for i in range(len(liste_index)):
         unite_val = meals_to_show.loc[liste_index[i],unite_col]
 
         st.text(meals_to_show.loc[liste_index[i],ingredient_col])
-        
+
         #todo check de null avants intégrations au df de la liste de course
-        if np.isnan(meals_to_show.loc[liste_index[i],ingredient_col]):
+        if meals_to_show.loc[liste_index[i],ingredient_col] is None :
             continue
         else:
             st.text('on est ici')
