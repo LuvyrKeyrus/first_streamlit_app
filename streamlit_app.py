@@ -5,8 +5,38 @@ st.title('Application de repas')
 st.header('Liste des repas')
 my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
+meals_selected = []
+col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 
-meals_selected = st.multiselect("Pick some meals :",list(my_meal_list.index))
+col_lun.header("Lundi")
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+
+col_mar.header("Mardi")
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+
+col_mer.header("Mercredi")
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+
+col_jeu.header("jeudi")
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+
+col_ven.header("vendredi")
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+
+col_sam.header("Samedi")
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+
+col_dim.header("dimanche")
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+
+meals_selected = st.multiselect("selection plat :",list(my_meal_list.index))
 
 st.dataframe(my_meal_list)
 
