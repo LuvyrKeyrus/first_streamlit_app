@@ -34,12 +34,11 @@ for i in range(len(liste_index)):
         quantite_val = meals_to_show.loc[liste_index[i],quantite_col]
         unite_val = meals_to_show.loc[liste_index[i],unite_col]
 
-        st.text(meals_to_show.loc[liste_index[i],ingredient_col])
-
         #todo check de null avants intégrations au df de la liste de course
         if pd.isna(meals_to_show.loc[liste_index[i],ingredient_col]) :
             continue
         else:
+            st.text(meals_to_show.loc[liste_index[i],ingredient_col])
             if ingredient_val in liste_courses.values :
                 st.text('on est la')
                 temp_index = liste_courses.index[(liste_courses['Ingrédient'] == ingredient_val)]
