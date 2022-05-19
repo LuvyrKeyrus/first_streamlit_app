@@ -33,8 +33,10 @@ def decrement_repas(repas):
 def aff_col_repas(index_select):
 
     col1.text(index_select)
-    col2.button('+1', on_click=increment_repas, args=(index_select,))
-    col3.button('-1', on_click=decrement_repas, args=(index_select,))
+    if col2.button('+1'):
+        meals_to_show['quantite'][index_select] = meals_to_show.loc[index_select,['quantite']] + 1
+    if col3.button('-1'):
+       meals_to_show['quantite'][index_select] = meals_to_show.loc[index_select,['quantite']] - 1 
 
 for i in range(len(liste_index)):
     aff_col_repas(liste_index[i])
