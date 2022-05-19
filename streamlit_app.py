@@ -14,14 +14,13 @@ st.dataframe(my_meal_list)
 
 
 meals_to_show=my_meal_list.loc[meals_selected]
-col1, col2 = st.columns(2)
-cont = col1.container()
-cont_col1,cont_col2,cont_col3 = cont.columns(3)
-col1.header('Repas choisis')
+coltitre1,coltitre2 = st.columns(2)
+col1, col2,col3, col4 = st.columns(1,1,1,3)
+coltitre1.header('Repas choisis')
 #col1.dataframe(meals_to_show)
 
 liste_courses=pd.DataFrame(columns=['Ingredient','Quantite','Unite'])
-col2.header('Ingredients choisis')
+coltitre2.header('Ingredients choisis')
 
 liste_index = meals_to_show.index
 def increment_repas(repas):
@@ -31,9 +30,9 @@ def decrement_repas(repas):
 
 def aff_col_repas(index_select):
 
-    cont_col1.text(index_select)
-    cont_col2.button('+1', on_click=increment_repas, args=(index_select,))
-    cont_col3.button('-1', on_click=decrement_repas, args=(index_select,))
+    col1.text(index_select)
+    col2.button('+1', on_click=increment_repas, args=(index_select,))
+    col3.button('-1', on_click=decrement_repas, args=(index_select,))
 
 for i in range(len(liste_index)):
     aff_col_repas(liste_index[i])
@@ -57,7 +56,7 @@ for i in range(len(liste_index)):
             else :
                 liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val,'Unite':unite_val}, ignore_index=True)
 
-col2.dataframe(liste_courses)
+col4.dataframe(liste_courses)
 
 
 csv = liste_courses.to_csv(sep=';').encode('utf-8')
