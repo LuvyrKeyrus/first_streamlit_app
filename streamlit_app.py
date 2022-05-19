@@ -31,7 +31,7 @@ def decrement_repas(repas):
 def aff_col_repas(index_select):
     if index_select not in st.session_state:
         st.session_state[index_select] = meals_to_show.loc[index_select,'quantite']
-    col1.text(index_select)
+    col1.subheader(index_select)
     col1.number_input('',min_value=0, max_value=10,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
     
     meals_to_show['quantite'][index_select] = st.session_state[index_select]
@@ -66,7 +66,7 @@ col2.dataframe(liste_courses)
 csv = liste_courses.to_csv(sep=';').encode('utf-8')
 
 st.download_button(
-     label="Download data as CSV",
+     label="Télécharger la liste de courses",
      data=csv,
      file_name='liste_courses.csv',
      mime='text/csv',
