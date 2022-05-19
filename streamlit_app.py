@@ -13,7 +13,7 @@ st.dataframe(my_meal_list)
 
 meals_to_show=my_meal_list.loc[meals_selected]
 coltitre1, coltitre2 = st.columns(2)
-col1, col2, col3 = st.columns([2,2,4])
+col1, col2 = st.columns([2,2])
 coltitre1.header('Repas choisis')
 
 
@@ -32,7 +32,7 @@ def aff_col_repas(index_select):
     if index_select not in st.session_state:
         st.session_state[index_select] = meals_to_show.loc[index_select,'quantite']
     col1.text(index_select)
-    col2.number_input('',min_value=0, max_value=10,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
+    col1.number_input('',min_value=0, max_value=10,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
     
     meals_to_show['quantite'][index_select] = st.session_state[index_select]
 
@@ -58,7 +58,7 @@ for i in range(len(liste_index)):
             else :
                 liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val * meals_to_show.loc[liste_index[i],'quantite'] ,'Unite':unite_val}, ignore_index=True)
 
-col3.dataframe(liste_courses)
+col2.dataframe(liste_courses)
 st.dataframe(meals_to_show)
 
 csv = liste_courses.to_csv(sep=';').encode('utf-8')
