@@ -55,9 +55,9 @@ for i in range(len(liste_index)):
         else:
             if ingredient_val in liste_courses['Ingredient'].values :
                 temp_index = liste_courses.index[(liste_courses['Ingredient'] == ingredient_val)]
-                liste_courses['Quantite'][temp_index] = liste_courses.loc[temp_index,['Quantite']] + quantite_val
+                liste_courses['Quantite'][temp_index] = liste_courses.loc[temp_index,['Quantite']] + quantite_val * meals_to_show.loc[liste_index[i],['quantite']]
             else :
-                liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val,'Unite':unite_val}, ignore_index=True)
+                liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val * meals_to_show.loc[liste_index[i],['quantite']] ,'Unite':unite_val}, ignore_index=True)
 
 col3.dataframe(liste_courses)
 st.dataframe(meals_to_show)
