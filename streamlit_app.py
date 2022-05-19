@@ -15,7 +15,7 @@ st.dataframe(my_meal_list)
 
 meals_to_show=my_meal_list.loc[meals_selected]
 coltitre1, coltitre2 = st.columns(2)
-col1, col2, col3, col4 = st.columns([2,1,1,4])
+col1, col2, col3 = st.columns([2,2,4])
 coltitre1.header('Repas choisis')
 
 
@@ -33,10 +33,9 @@ def decrement_repas(repas):
 def aff_col_repas(index_select):
 
     col1.text(index_select)
-    if col2.button('+1'):
-        meals_to_show['quantite'][index_select] = meals_to_show.loc[index_select,['quantite']] + 1
-    if col3.button('-1'):
-       meals_to_show['quantite'][index_select] = meals_to_show.loc[index_select,['quantite']] - 1 
+    number = col2.number_input(min_value=0, max_value=10,value = meals_to_show.loc[index_select,['quantite']],step=1)
+    meals_to_show['quantite'][index_select] = number
+
 
 for i in range(len(liste_index)):
     aff_col_repas(liste_index[i])
@@ -60,7 +59,7 @@ for i in range(len(liste_index)):
             else :
                 liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val,'Unite':unite_val}, ignore_index=True)
 
-col4.dataframe(liste_courses)
+col3.dataframe(liste_courses)
 st.dataframe(meals_to_show)
 
 csv = liste_courses.to_csv(sep=';').encode('utf-8')
