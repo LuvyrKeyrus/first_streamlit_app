@@ -6,6 +6,7 @@ st.header('Liste des repas')
 my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
 meals_selected = []
+st.text(meals_selected)
 #todo faire par jours pour sortir le tableau des repas de la semaine ensuite
 st.header("Lundi")
 st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
