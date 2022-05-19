@@ -45,7 +45,7 @@ for i in range(len(liste_index)):
                 liste_courses.set_value(temp_index,'Quantité',liste_courses.loc[temp_index,['Quantité']] + quantite_val )
             else :
                 st.text('on est pas la')
-                liste_courses.append({'Ingrédient':ingredient_val,'Quantité':quantite_val,'Unité':unite_val})
+                liste_courses = liste_courses.append({'Ingrédient':ingredient_val,'Quantité':quantite_val,'Unité':unite_val}, ignore_index=True)
 
 st.dataframe(liste_courses)
 
