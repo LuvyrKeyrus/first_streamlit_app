@@ -33,10 +33,8 @@ def aff_col_repas(index_select):
     if index_select not in st.session_state:
         st.session_state[index_select] = meals_to_show.loc[index_select,'quantite']
     col1.text(index_select)
-    number_select = col2.number_input('',min_value=0, max_value=10,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
+    col2.number_input('',min_value=0, max_value=10,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
     
-    #used_widget_key = st.get_last_used_widget_key()
-    st.session_state[index_select]  = number_select
     meals_to_show['quantite'][index_select] = st.write(st.session_state[index_select])
 
 for i in range(len(liste_index)):
