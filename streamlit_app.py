@@ -9,10 +9,10 @@ meals_selected = []
 
 #todo faire par jours pour sortir le tableau des repas de la semaine ensuite
 st.header("Lundi")
-st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
-st.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
-meals_selected.append(st.session_state['lun_midi'])
-meals_selected.append(st.session_state['lun_soir'])
+meals_selected=st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
+meals_selected=st.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
+#meals_selected.append(st.session_state['lun_midi'])
+#meals_selected.append(st.session_state['lun_soir'])
 
 st.header("Mardi")
 meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "mar_midi"))
