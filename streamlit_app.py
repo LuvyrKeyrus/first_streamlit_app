@@ -14,8 +14,8 @@ st.dataframe(my_meal_list)
 
 
 meals_to_show=my_meal_list.loc[meals_selected]
-coltitre1,coltitre2 = st.columns(2)
-col1, col2,col3, col4 = st.columns(1,1,1,3)
+coltitre1, coltitre2 = st.columns(2)
+col1, col2, col3, col4 = st.columns([1,1,1,3])
 coltitre1.header('Repas choisis')
 #col1.dataframe(meals_to_show)
 
