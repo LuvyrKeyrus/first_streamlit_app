@@ -40,7 +40,6 @@ for i in range(len(liste_index)):
         if pd.isna(meals_to_show.loc[liste_index[i],ingredient_col]) :
             continue
         else:
-            st.text('on est ici')
             if ingredient_val in liste_courses.values :
                 st.text('on est la')
                 temp_index = liste_courses.index[(liste_courses['Ingrédient'] == ingredient_val)]
