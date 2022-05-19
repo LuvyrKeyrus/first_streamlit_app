@@ -44,7 +44,7 @@ for i in range(len(liste_index)):
                 temp_index = liste_courses.index[(liste_courses['Ingrédient'] == ingredient_val)]
                 st.text('passe')
                 st.text(temp_index)
-                liste_courses.set_value(temp_index,'Quantité',liste_courses.loc[temp_index,['Quantité']] + quantite_val )
+                liste_courses['Quantité'][temp_index] = liste_courses.loc[temp_index,['Quantité']] + quantite_val
             else :
                 liste_courses = liste_courses.append({'Ingrédient':ingredient_val,'Quantité':quantite_val,'Unité':unite_val}, ignore_index=True)
 
