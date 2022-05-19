@@ -5,36 +5,35 @@ st.title('Application de repas')
 st.header('Liste des repas')
 my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
-col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 meals_selected = []
-
-col_lun.header("Lundi")
+#todo faire par jours pour sortir le tableau des repas de la semaine ensuite
+st.header("Lundi")
 st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
 st.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
 meals_selected.append(st.session_state['lun_midi'])
 meals_selected.append(st.session_state['lun_soir'])
 
-col_mar.header("Mardi")
+st.header("Mardi")
 meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "mar_midi"))
 meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "mar_soir"))
 
-col_mer.header("Mercredi")
+st.header("Mercredi")
 meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "mer_midi"))
 meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "mer_soir"))
 
-col_jeu.header("jeudi")
+st.header("jeudi")
 meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "jeu_midi"))
 meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "jeu_soir"))
 
-col_ven.header("vendredi")
+st.header("vendredi")
 meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "ven_midi"))
 meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "ven_soir"))
 
-col_sam.header("Samedi")
+st.header("Samedi")
 meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "sam_midi"))
 meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "sam_soir"))
 
-col_dim.header("dimanche")
+st.header("dimanche")
 meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "dim_midi"))
 meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "dim_soir"))
 
@@ -71,7 +70,6 @@ for i in range(len(liste_index)):
         quantite_val = meals_to_show.loc[liste_index[i],quantite_col]
         unite_val = meals_to_show.loc[liste_index[i],unite_col]
 
-        #todo check de null avants intégrations au df de la liste de course
         if pd.isna(meals_to_show.loc[liste_index[i],ingredient_col]) :
             continue
         else:
