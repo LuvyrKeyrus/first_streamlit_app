@@ -33,7 +33,7 @@ def decrement_repas(repas):
 def aff_col_repas(index_select):
 
     col1.text(index_select)
-    number = col2.number_input(min_value=0, max_value=10,value = meals_to_show.loc[index_select,['quantite']],step=1)
+    number = col2.number_input('',min_value=0, max_value=10,value = meals_to_show.loc[index_select,['quantite']],step=1)
     meals_to_show['quantite'][index_select] = number
 
 
