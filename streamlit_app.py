@@ -17,14 +17,14 @@ meals_to_show=my_meal_list.loc[meals_selected]
 st.header('Repas choisis')
 st.dataframe(meals_to_show)
 
-st.text(type(meals_to_show))
-liste_courses=pd.DataFrame(columns=['Ingrédient','Quantité','Unité'])
+liste_courses=pd.DataFrame(columns=['Ingredient','Quantite','Unite'])
 st.header('Ingredients choisis')
 
 liste_index = meals_to_show.index
-st.text(liste_index)
+
 for i in range(len(liste_index)):
     st.text(liste_index[i])
+
     for y in range (1,11):
         ingredient_col = 'ingrédient_'+ str(y)
         quantite_col = 'quantite_ingredient_'+ str(y)
@@ -38,15 +38,11 @@ for i in range(len(liste_index)):
         if pd.isna(meals_to_show.loc[liste_index[i],ingredient_col]) :
             continue
         else:
-            st.text(meals_to_show.loc[liste_index[i],ingredient_col])
-            if ingredient_val in liste_courses['Ingrédient'].values :
-                st.text('on est la')
-                temp_index = liste_courses.index[(liste_courses['Ingrédient'] == ingredient_val)]
-                st.text('passe')
-                st.text(temp_index)
-                liste_courses['Quantité'][temp_index] = liste_courses.loc[temp_index,['Quantité']] + quantite_val
+            if ingredient_val in liste_courses['Ingredient'].values :
+                temp_index = liste_courses.index[(liste_courses['Ingredient'] == ingredient_val)]
+                liste_courses['Quantite'][temp_index] = liste_courses.loc[temp_index,['Quantite']] + quantite_val
             else :
-                liste_courses = liste_courses.append({'Ingrédient':ingredient_val,'Quantité':quantite_val,'Unité':unite_val}, ignore_index=True)
+                liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val,'Unite':unite_val}, ignore_index=True)
 
 st.dataframe(liste_courses)
 
