@@ -7,7 +7,7 @@ my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
 
 meals_selected = st.multiselect("Pick some meals :",list(my_meal_list.index))
-
+st.text(meals_selected)
 st.dataframe(my_meal_list)
 
 meals_to_show=my_meal_list.loc[meals_selected]
