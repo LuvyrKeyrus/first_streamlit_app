@@ -1,7 +1,6 @@
-from cmath import nan
-from numpy import NaN
 import streamlit as st
 import pandas as pd
+import numpy as np
 
 st.title('Application de repas')
 st.header('Liste des repas')
@@ -34,7 +33,9 @@ for i in range(len(liste_index)):
         quantite_val = meals_to_show.loc[liste_index[i],quantite_col]
         unite_val = meals_to_show.loc[liste_index[i],unite_col]
         #todo check de null avants intégrations au df de la liste de course
-        if meals_to_show.loc[liste_index[i],ingredient_col] is not nan :
+        if np.isnan(meals_to_show.loc[liste_index[i],ingredient_col]):
+            continue
+        else:
             st.text('on est ici')
             if ingredient_val in liste_courses.values :
                 st.text('on est la')
