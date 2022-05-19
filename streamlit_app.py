@@ -1,3 +1,4 @@
+from cmath import nan
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -36,7 +37,7 @@ for i in range(len(liste_index)):
         st.text(meals_to_show.loc[liste_index[i],ingredient_col])
 
         #todo check de null avants intégrations au df de la liste de course
-        if meals_to_show.loc[liste_index[i],ingredient_col] is None :
+        if pd.isna(meals_to_show.loc[liste_index[i],ingredient_col]) :
             continue
         else:
             st.text('on est ici')
