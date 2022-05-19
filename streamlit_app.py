@@ -10,7 +10,7 @@ col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 
 col_lun.header("Lundi")
 meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi"))
-meals_selected.append(st.multiselect("soir :",list(my_meal_list.index,key = "lun_soir")))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "lun_soir"))
 
 col_mar.header("Mardi")
 meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "mar_midi"))
