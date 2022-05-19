@@ -58,8 +58,10 @@ for i in range(len(liste_index)):
             else :
                 liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val * meals_to_show.loc[liste_index[i],'quantite'] ,'Unite':unite_val}, ignore_index=True)
 
+indexNames = liste_courses[ liste_courses['Quantite'] == 0 ].index
+# Delete these row indexes from dataFrame
+liste_courses.drop(indexNames , inplace=True)
 col2.dataframe(liste_courses)
-st.dataframe(meals_to_show)
 
 csv = liste_courses.to_csv(sep=';').encode('utf-8')
 
