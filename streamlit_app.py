@@ -25,8 +25,7 @@ coltitre2.header('Ingredients choisis')
 liste_index = meals_to_show.index
 def increment_repas(repas):
     st.text(repas)
-    st.text(meals_to_show.loc[repas,'quantite'])
-    meals_to_show['quantite'][repas] = meals_to_show.loc[repas,'quantite'] + 1
+    meals_to_show[repas]['quantite'] = meals_to_show.loc[repas,'quantite'] + 1
 def decrement_repas(repas):
     meals_to_show['quantite'][repas] = meals_to_show.loc[repas,'quantite'] - 1
 
