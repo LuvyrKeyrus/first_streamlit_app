@@ -17,7 +17,7 @@ meals_to_show=my_meal_list.loc[meals_selected]
 coltitre1, coltitre2 = st.columns(2)
 col1, col2, col3, col4 = st.columns([1,1,1,3])
 coltitre1.header('Repas choisis')
-#col1.dataframe(meals_to_show)
+
 
 liste_courses=pd.DataFrame(columns=['Ingredient','Quantite','Unite'])
 coltitre2.header('Ingredients choisis')
@@ -57,7 +57,7 @@ for i in range(len(liste_index)):
                 liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val,'Unite':unite_val}, ignore_index=True)
 
 col4.dataframe(liste_courses)
-
+st.dataframe(meals_to_show)
 
 csv = liste_courses.to_csv(sep=';').encode('utf-8')
 
