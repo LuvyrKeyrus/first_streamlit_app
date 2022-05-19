@@ -9,32 +9,32 @@ meals_selected = []
 col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 
 col_lun.header("Lundi")
-meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
-meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi"))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index,key = "lun_soir")))
 
 col_mar.header("Mardi")
-meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
-meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "mar_midi"))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "mar_soir"))
 
 col_mer.header("Mercredi")
-meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
-meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "mer_midi"))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "mer_soir"))
 
 col_jeu.header("jeudi")
-meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
-meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "jeu_midi"))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "jeu_soir"))
 
 col_ven.header("vendredi")
-meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
-meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "ven_midi"))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "ven_soir"))
 
 col_sam.header("Samedi")
-meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
-meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "sam_midi"))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "sam_soir"))
 
 col_dim.header("dimanche")
-meals_selected.append(st.multiselect("midi :",list(my_meal_list.index)))
-meals_selected.append(st.multiselect("soir :",list(my_meal_list.index)))
+meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "dim_midi"))
+meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "dim_soir"))
 
 meals_selected = st.multiselect("selection plat :",list(my_meal_list.index))
 
