@@ -11,19 +11,19 @@ my_meal_list = my_meal_list.set_index('plats')
 meals_selected = st.multiselect("Pick some meals :",list(my_meal_list.index))
 
 st.dataframe(my_meal_list)
-  
+
 
 meals_to_show=my_meal_list.loc[meals_selected]
-st.header('Repas choisis')
-st.dataframe(meals_to_show)
+col1, col2 = st.columns(2)
+col1.header('Repas choisis')
+col1.dataframe(meals_to_show)
 
 liste_courses=pd.DataFrame(columns=['Ingredient','Quantite','Unite'])
-st.header('Ingredients choisis')
+col2.header('Ingredients choisis')
 
 liste_index = meals_to_show.index
 
 for i in range(len(liste_index)):
-    st.text(liste_index[i])
 
     for y in range (1,11):
         ingredient_col = 'ingrédient_'+ str(y)
@@ -44,7 +44,7 @@ for i in range(len(liste_index)):
             else :
                 liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val,'Unite':unite_val}, ignore_index=True)
 
-st.dataframe(liste_courses)
+col2.dataframe(liste_courses)
 
 
 csv = liste_courses.to_csv().encode('utf-8')
