@@ -6,7 +6,7 @@ st.header('Liste des repas')
 my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
 meals_selected = []
-st.text(meals_selected)
+
 #todo faire par jours pour sortir le tableau des repas de la semaine ensuite
 st.header("Lundi")
 st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
@@ -39,7 +39,7 @@ meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "di
 meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "dim_soir"))
 
 #meals_selected = st.multiselect("selection plat :",list(my_meal_list.index))
-
+st.text(meals_selected)
 st.dataframe(my_meal_list)
 
 meals_to_show=my_meal_list.loc[meals_selected]
