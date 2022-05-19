@@ -15,6 +15,7 @@ st.dataframe(my_meal_list)
 
 meals_to_show=my_meal_list.loc[meals_selected]
 col1, col2 = st.columns(2)
+cont_col1,cont_col2,cont_col3 = col1.columns(3)
 col1.header('Repas choisis')
 #col1.dataframe(meals_to_show)
 
@@ -23,16 +24,15 @@ col2.header('Ingredients choisis')
 
 liste_index = meals_to_show.index
 def increment_repas(repas):
-    st.session_state.count += 1
-def suprimer_repas(repas):
-    st.session_state.count += 1
+    meals_to_show['quantite'][repas] = meals_to_show.loc[repas,'quantite'] + 1
+def decrement_repas(repas):
+    meals_to_show['quantite'][repas] = meals_to_show.loc[repas,'quantite'] - 1
 
 def aff_col_repas(index_select):
-    cont = col1.container(1)
-    cont_col1,cont_col2,cont_col3 = cont.columns(3)
+
     cont_col1.text(index_select)
     cont_col2.button('+1', on_click=increment_repas, args=(index_select,))
-    cont_col3.button('Supprimer', on_click=suprimer_repas, args=(index_select,))
+    cont_col3.button('-1', on_click=decrement_repas, args=(index_select,))
 
 for i in range(len(liste_index)):
     aff_col_repas(liste_index[i])
