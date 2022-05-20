@@ -8,42 +8,59 @@ my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
 meals_selected = []
 col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
+def selection_repas():
+    meals_selected = meals_selected + st.session_state['lun_midi']
+    meals_selected = meals_selected + st.session_state['lun_soir']
+    meals_selected = meals_selected + st.session_state['mar_midi']
+    meals_selected = meals_selected + st.session_state['mar_soir']
+    meals_selected = meals_selected + st.session_state['mer_midi']
+    meals_selected = meals_selected + st.session_state['mer_soir']
+    meals_selected = meals_selected + st.session_state['jeu_midi']
+    meals_selected = meals_selected + st.session_state['jeu_soir']
+    meals_selected = meals_selected + st.session_state['ven_midi']
+    meals_selected = meals_selected + st.session_state['ven_soir']
+    meals_selected = meals_selected + st.session_state['sam_midi']
+    meals_selected = meals_selected + st.session_state['sam_soir']
+    meals_selected = meals_selected + st.session_state['dim_midi']
+    meals_selected = meals_selected + st.session_state['dim_soir']
+
+def affichage_semaine():
+    col_lun.header("Lundi")
+    col_lun.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
+    col_lun.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
 
 
-#todo faire par jours pour sortir le tableau des repas de la semaine ensuite
-col_lun.header("Lundi")
-col_lun.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
-col_lun.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
-meals_selected = meals_selected + st.session_state['lun_midi']
-meals_selected = meals_selected + st.session_state['lun_soir']
+    col_mar.header("Mardi")
+    col_mar.multiselect("midi :",list(my_meal_list.index),key = "mar_midi")
+    col_mar.multiselect("soir :",list(my_meal_list.index),key = "mar_soir")
 
-col_mar.header("Mardi")
-col_mar.multiselect("midi :",list(my_meal_list.index),key = "mar_midi")
-col_mar.multiselect("soir :",list(my_meal_list.index),key = "mar_soir")
+    col_mer.header("Mercredi")
+    col_mer.multiselect("midi :",list(my_meal_list.index),key = "mer_midi")
+    col_mer.multiselect("soir :",list(my_meal_list.index),key = "mer_soir")
 
-col_mer.header("Mercredi")
-col_mer.multiselect("midi :",list(my_meal_list.index),key = "mer_midi")
-col_mer.multiselect("soir :",list(my_meal_list.index),key = "mer_soir")
+    col_jeu.header("jeudi")
+    col_jeu.multiselect("midi :",list(my_meal_list.index),key = "jeu_midi")
+    col_jeu.multiselect("soir :",list(my_meal_list.index),key = "jeu_soir")
 
-col_jeu.header("jeudi")
-col_jeu.multiselect("midi :",list(my_meal_list.index),key = "jeu_midi")
-col_jeu.multiselect("soir :",list(my_meal_list.index),key = "jeu_soir")
+    col_ven.header("vendredi")
+    col_ven.multiselect("midi :",list(my_meal_list.index),key = "ven_midi")
+    col_ven.multiselect("soir :",list(my_meal_list.index),key = "ven_soir")
 
-col_ven.header("vendredi")
-col_ven.multiselect("midi :",list(my_meal_list.index),key = "ven_midi")
-col_ven.multiselect("soir :",list(my_meal_list.index),key = "ven_soir")
+    col_sam.header("Samedi")
+    col_sam.multiselect("midi :",list(my_meal_list.index),key = "sam_midi")
+    col_sam.multiselect("soir :",list(my_meal_list.index),key = "sam_soir")
 
-col_sam.header("Samedi")
-col_sam.multiselect("midi :",list(my_meal_list.index),key = "sam_midi")
-col_sam.multiselect("soir :",list(my_meal_list.index),key = "sam_soir")
+    col_dim.header("dimanche")
+    col_dim.multiselect("midi :",list(my_meal_list.index),key = "dim_midi")
+    col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
 
-col_dim.header("dimanche")
-col_dim.multiselect("midi :",list(my_meal_list.index),key = "dim_midi")
-col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
 
-#meals_selected = st.multiselect("selection plat :",list(my_meal_list.index))
+affichage_semaine()
+selection_repas()
+
 st.text(meals_selected)
 st.dataframe(my_meal_list)
+
 
 meals_to_show=my_meal_list.loc[meals_selected]
 coltitre1, coltitre2 = st.columns(2)
@@ -63,25 +80,29 @@ def aff_col_repas(index_select):
     meals_to_show['quantite'][index_select] = st.session_state[index_select]
 
 for i in range(len(liste_index)):
-    aff_col_repas(liste_index[i])
-    
-    for y in range (1,11):
-        ingredient_col = 'ingrédient_'+ str(y)
-        quantite_col = 'quantite_ingredient_'+ str(y)
-        unite_col = 'unité_mesure_ingredient_'+ str(y)
+    if liste_index[i] in meals_to_show.index:
+        pass
+    else:
+        temp_index_meals = meals_to_show.index[(liste_courses['Ingredient'] == ingredient_val)]
+        aff_col_repas(liste_index[i])
+        
+        for y in range (1,11):
+            ingredient_col = 'ingrédient_'+ str(y)
+            quantite_col = 'quantite_ingredient_'+ str(y)
+            unite_col = 'unité_mesure_ingredient_'+ str(y)
 
-        ingredient_val = meals_to_show.loc[liste_index[i],ingredient_col]
-        quantite_val = meals_to_show.loc[liste_index[i],quantite_col]
-        unite_val = meals_to_show.loc[liste_index[i],unite_col]
+            ingredient_val = meals_to_show.loc[liste_index[i],ingredient_col]
+            quantite_val = meals_to_show.loc[liste_index[i],quantite_col]
+            unite_val = meals_to_show.loc[liste_index[i],unite_col]
 
-        if pd.isna(meals_to_show.loc[liste_index[i],ingredient_col]) :
-            continue
-        else:
-            if ingredient_val in liste_courses['Ingredient'].values :
-                temp_index = liste_courses.index[(liste_courses['Ingredient'] == ingredient_val)]
-                liste_courses['Quantite'][temp_index] = liste_courses.loc[temp_index,['Quantite']] + quantite_val * meals_to_show.loc[liste_index[i],'quantite']
-            else :
-                liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val * meals_to_show.loc[liste_index[i],'quantite'] ,'Unite':unite_val}, ignore_index=True)
+            if pd.isna(meals_to_show.loc[liste_index[i],ingredient_col]) :
+                continue
+            else:
+                if ingredient_val in liste_courses['Ingredient'].values :
+                    temp_index = liste_courses.index[(liste_courses['Ingredient'] == ingredient_val)]
+                    liste_courses['Quantite'][temp_index] = liste_courses.loc[temp_index,['Quantite']] + quantite_val * meals_to_show.loc[liste_index[i],'quantite']
+                else :
+                    liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val * meals_to_show.loc[liste_index[i],'quantite'] ,'Unite':unite_val}, ignore_index=True)
 
 indexNames = liste_courses[ liste_courses['Quantite'] == 0 ].index
 # Delete these row indexes from dataFrame
