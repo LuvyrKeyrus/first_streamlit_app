@@ -9,53 +9,50 @@ my_meal_list = my_meal_list.set_index('plats')
 meals_selected = []
 col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 
-def affichage_semaine(my_meal_list,meals_selected):
-    col_lun.header("Lundi")
-    col_lun.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
-    col_lun.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
-    meals_selected = meals_selected + st.session_state['lun_midi']
-    meals_selected = meals_selected + st.session_state['lun_soir']
+col_lun.header("Lundi")
+col_lun.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
+col_lun.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
+meals_selected = meals_selected + st.session_state['lun_midi']
+meals_selected = meals_selected + st.session_state['lun_soir']
 
-    col_mar.header("Mardi")
-    col_mar.multiselect("midi :",list(my_meal_list.index),key = "mar_midi")
-    col_mar.multiselect("soir :",list(my_meal_list.index),key = "mar_soir")
-    meals_selected = meals_selected + st.session_state['mar_midi']
-    meals_selected = meals_selected + st.session_state['mar_soir']
+col_mar.header("Mardi")
+col_mar.multiselect("midi :",list(my_meal_list.index),key = "mar_midi")
+col_mar.multiselect("soir :",list(my_meal_list.index),key = "mar_soir")
+meals_selected = meals_selected + st.session_state['mar_midi']
+meals_selected = meals_selected + st.session_state['mar_soir']
 
-    col_mer.header("Mercredi")
-    col_mer.multiselect("midi :",list(my_meal_list.index),key = "mer_midi")
-    col_mer.multiselect("soir :",list(my_meal_list.index),key = "mer_soir")
-    meals_selected = meals_selected + st.session_state['mer_midi']
-    meals_selected = meals_selected + st.session_state['mer_soir']
+col_mer.header("Mercredi")
+col_mer.multiselect("midi :",list(my_meal_list.index),key = "mer_midi")
+col_mer.multiselect("soir :",list(my_meal_list.index),key = "mer_soir")
+meals_selected = meals_selected + st.session_state['mer_midi']
+meals_selected = meals_selected + st.session_state['mer_soir']
 
-    col_jeu.header("jeudi")
-    col_jeu.multiselect("midi :",list(my_meal_list.index),key = "jeu_midi")
-    col_jeu.multiselect("soir :",list(my_meal_list.index),key = "jeu_soir")
+col_jeu.header("jeudi")
+col_jeu.multiselect("midi :",list(my_meal_list.index),key = "jeu_midi")
+col_jeu.multiselect("soir :",list(my_meal_list.index),key = "jeu_soir")
 
-    col_ven.header("vendredi")
-    col_ven.multiselect("midi :",list(my_meal_list.index),key = "ven_midi")
-    col_ven.multiselect("soir :",list(my_meal_list.index),key = "ven_soir")
+col_ven.header("vendredi")
+col_ven.multiselect("midi :",list(my_meal_list.index),key = "ven_midi")
+col_ven.multiselect("soir :",list(my_meal_list.index),key = "ven_soir")
 
-    col_sam.header("Samedi")
-    col_sam.multiselect("midi :",list(my_meal_list.index),key = "sam_midi")
-    col_sam.multiselect("soir :",list(my_meal_list.index),key = "sam_soir")
+col_sam.header("Samedi")
+col_sam.multiselect("midi :",list(my_meal_list.index),key = "sam_midi")
+col_sam.multiselect("soir :",list(my_meal_list.index),key = "sam_soir")
 
-    col_dim.header("dimanche")
-    col_dim.multiselect("midi :",list(my_meal_list.index),key = "dim_midi")
-    col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
-
+col_dim.header("dimanche")
+col_dim.multiselect("midi :",list(my_meal_list.index),key = "dim_midi")
+col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
 
 
-    meals_selected = meals_selected + st.session_state['jeu_midi']
-    meals_selected = meals_selected + st.session_state['jeu_soir']
-    meals_selected = meals_selected + st.session_state['ven_midi']
-    meals_selected = meals_selected + st.session_state['ven_soir']
-    meals_selected = meals_selected + st.session_state['sam_midi']
-    meals_selected = meals_selected + st.session_state['sam_soir']
-    meals_selected = meals_selected + st.session_state['dim_midi']
-    meals_selected = meals_selected + st.session_state['dim_soir']
 
-affichage_semaine(my_meal_list,meals_selected)
+meals_selected = meals_selected + st.session_state['jeu_midi']
+meals_selected = meals_selected + st.session_state['jeu_soir']
+meals_selected = meals_selected + st.session_state['ven_midi']
+meals_selected = meals_selected + st.session_state['ven_soir']
+meals_selected = meals_selected + st.session_state['sam_midi']
+meals_selected = meals_selected + st.session_state['sam_soir']
+meals_selected = meals_selected + st.session_state['dim_midi']
+meals_selected = meals_selected + st.session_state['dim_soir']
 
 st.text(meals_selected)
 st.dataframe(my_meal_list)
