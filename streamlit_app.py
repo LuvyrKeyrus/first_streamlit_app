@@ -11,14 +11,17 @@ meals_selected = []
 
 #todo faire par jours pour sortir le tableau des repas de la semaine ensuite
 st.header("Lundi")
-if pd.isna(st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")) :
+lmidi = st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
+lsoir = st.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
+
+if pd.isna(lmidi) :
     pass
 else:
-    meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi"))
-if pd.isna(st.multiselect("midi :",list(my_meal_list.index),key = "lun_soir")) :
+    meals_selected.append(lmidi)
+if pd.isna(lsoir) :
     pass
 else:
-    meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "lun_soir"))  
+    meals_selected.append(lsoir))  
 #meals_selected.append(st.session_state['lun_midi'])
 #meals_selected.append(st.session_state['lun_soir'])
 
