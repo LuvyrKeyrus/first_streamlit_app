@@ -1,16 +1,17 @@
 import streamlit as st
 import pandas as pd
+st.set_page_config(layout="wide")
 
 st.title('Application de repas')
 st.header('Liste des repas')
 my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
-meals_selected = 0
+meals_selected = []
 
 #todo faire par jours pour sortir le tableau des repas de la semaine ensuite
 st.header("Lundi")
-meals_selected=st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
-meals_selected=st.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
+meals_selected=meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi"))
+meals_selected=meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "lun_soir"))
 #meals_selected.append(st.session_state['lun_midi'])
 #meals_selected.append(st.session_state['lun_soir'])
 
