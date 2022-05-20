@@ -8,23 +8,8 @@ my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
 meals_selected = []
 col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
-def selection_repas(meals_selected):
-    meals_selected = meals_selected + st.session_state['lun_midi']
-    meals_selected = meals_selected + st.session_state['lun_soir']
-    meals_selected = meals_selected + st.session_state['mar_midi']
-    meals_selected = meals_selected + st.session_state['mar_soir']
-    meals_selected = meals_selected + st.session_state['mer_midi']
-    meals_selected = meals_selected + st.session_state['mer_soir']
-    meals_selected = meals_selected + st.session_state['jeu_midi']
-    meals_selected = meals_selected + st.session_state['jeu_soir']
-    meals_selected = meals_selected + st.session_state['ven_midi']
-    meals_selected = meals_selected + st.session_state['ven_soir']
-    meals_selected = meals_selected + st.session_state['sam_midi']
-    meals_selected = meals_selected + st.session_state['sam_soir']
-    meals_selected = meals_selected + st.session_state['dim_midi']
-    meals_selected = meals_selected + st.session_state['dim_soir']
 
-def affichage_semaine(my_meal_list):
+def affichage_semaine(my_meal_list,meals_selected):
     col_lun.header("Lundi")
     col_lun.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
     col_lun.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
@@ -53,10 +38,22 @@ def affichage_semaine(my_meal_list):
     col_dim.header("dimanche")
     col_dim.multiselect("midi :",list(my_meal_list.index),key = "dim_midi")
     col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
+    meals_selected = meals_selected + st.session_state['lun_midi']
+    meals_selected = meals_selected + st.session_state['lun_soir']
+    meals_selected = meals_selected + st.session_state['mar_midi']
+    meals_selected = meals_selected + st.session_state['mar_soir']
+    meals_selected = meals_selected + st.session_state['mer_midi']
+    meals_selected = meals_selected + st.session_state['mer_soir']
+    meals_selected = meals_selected + st.session_state['jeu_midi']
+    meals_selected = meals_selected + st.session_state['jeu_soir']
+    meals_selected = meals_selected + st.session_state['ven_midi']
+    meals_selected = meals_selected + st.session_state['ven_soir']
+    meals_selected = meals_selected + st.session_state['sam_midi']
+    meals_selected = meals_selected + st.session_state['sam_soir']
+    meals_selected = meals_selected + st.session_state['dim_midi']
+    meals_selected = meals_selected + st.session_state['dim_soir']
 
-
-affichage_semaine(my_meal_list)
-selection_repas(meals_selected)
+affichage_semaine(my_meal_list,meals_selected)
 
 st.text(meals_selected)
 st.dataframe(my_meal_list)
