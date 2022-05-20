@@ -108,7 +108,7 @@ col2.dataframe(liste_courses)
 
 csv = liste_courses.to_csv().encode('utf-8')
 
-st.download_button(
+col2.download_button(
      label="Télécharger la liste de courses",
      data=csv,
      file_name='liste_courses.csv',
