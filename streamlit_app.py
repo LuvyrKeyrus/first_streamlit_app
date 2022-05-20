@@ -8,10 +8,17 @@ my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
 meals_selected = []
 
+
 #todo faire par jours pour sortir le tableau des repas de la semaine ensuite
 st.header("Lundi")
-meals_selected=meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi"))
-meals_selected=meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "lun_soir"))
+if pd.isna(st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")) :
+    pass
+else:
+    meals_selected.append(st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi"))
+if pd.isna(st.multiselect("midi :",list(my_meal_list.index),key = "lun_soir")) :
+    pass
+else:
+    meals_selected.append(st.multiselect("soir :",list(my_meal_list.index),key = "lun_soir"))  
 #meals_selected.append(st.session_state['lun_midi'])
 #meals_selected.append(st.session_state['lun_soir'])
 
