@@ -73,7 +73,7 @@ def aff_col_repas(index_select):
     meals_to_show['quantite'][index_select] = st.session_state[index_select]
 
 for i in range(len(liste_index)):
-    temp_index_meals = meals_to_show.index[(liste_courses['Ingredient'] == ingredient_val)]
+
     aff_col_repas(liste_index[i])
     
     for y in range (1,11):
