@@ -24,7 +24,7 @@ def selection_repas(meals_selected):
     meals_selected = meals_selected + st.session_state['dim_midi']
     meals_selected = meals_selected + st.session_state['dim_soir']
 
-def affichage_semaine():
+def affichage_semaine(my_meal_list):
     col_lun.header("Lundi")
     col_lun.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
     col_lun.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
