@@ -54,8 +54,15 @@ meals_selected = meals_selected + st.session_state['dim_soir']
 
 st.text(meals_selected)
 
+for taille in len(meals_selected):
+    if taille == 0:
+        meals_to_show=my_meal_list.loc[meals_selected[taille]]
+    else:
+        if meals_selected[taille] not in meals_to_show.index :
+            meals_to_show=meals_to_show.append(my_meal_list.loc[meals_selected[taille]])
+        else:
+            meals_to_show ['quantite'][meals_selected[taille]] = meals_to_show ['quantite'][meals_selected[taille]] + 1
 
-meals_to_show=my_meal_list.loc[meals_selected]
 coltitre1, coltitre2 = st.columns(2)
 col1, col2 = st.columns([2,2])
 coltitre1.header('Repas choisis')
