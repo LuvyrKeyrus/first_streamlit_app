@@ -13,15 +13,20 @@ def affichage_semaine(my_meal_list,meals_selected):
     col_lun.header("Lundi")
     col_lun.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
     col_lun.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
-
+    meals_selected = meals_selected + st.session_state['lun_midi']
+    meals_selected = meals_selected + st.session_state['lun_soir']
 
     col_mar.header("Mardi")
     col_mar.multiselect("midi :",list(my_meal_list.index),key = "mar_midi")
     col_mar.multiselect("soir :",list(my_meal_list.index),key = "mar_soir")
+    meals_selected = meals_selected + st.session_state['mar_midi']
+    meals_selected = meals_selected + st.session_state['mar_soir']
 
     col_mer.header("Mercredi")
     col_mer.multiselect("midi :",list(my_meal_list.index),key = "mer_midi")
     col_mer.multiselect("soir :",list(my_meal_list.index),key = "mer_soir")
+    meals_selected = meals_selected + st.session_state['mer_midi']
+    meals_selected = meals_selected + st.session_state['mer_soir']
 
     col_jeu.header("jeudi")
     col_jeu.multiselect("midi :",list(my_meal_list.index),key = "jeu_midi")
@@ -38,12 +43,9 @@ def affichage_semaine(my_meal_list,meals_selected):
     col_dim.header("dimanche")
     col_dim.multiselect("midi :",list(my_meal_list.index),key = "dim_midi")
     col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
-    meals_selected = meals_selected + st.session_state['lun_midi']
-    meals_selected = meals_selected + st.session_state['lun_soir']
-    meals_selected = meals_selected + st.session_state['mar_midi']
-    meals_selected = meals_selected + st.session_state['mar_soir']
-    meals_selected = meals_selected + st.session_state['mer_midi']
-    meals_selected = meals_selected + st.session_state['mer_soir']
+
+
+
     meals_selected = meals_selected + st.session_state['jeu_midi']
     meals_selected = meals_selected + st.session_state['jeu_soir']
     meals_selected = meals_selected + st.session_state['ven_midi']
