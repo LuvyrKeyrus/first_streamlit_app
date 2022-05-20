@@ -8,7 +8,7 @@ my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
 meals_selected = []
 col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
-def selection_repas():
+def selection_repas(meals_selected):
     meals_selected = meals_selected + st.session_state['lun_midi']
     meals_selected = meals_selected + st.session_state['lun_soir']
     meals_selected = meals_selected + st.session_state['mar_midi']
@@ -55,8 +55,8 @@ def affichage_semaine():
     col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
 
 
-affichage_semaine()
-selection_repas()
+affichage_semaine(my_meal_list)
+selection_repas(meals_selected)
 
 st.text(meals_selected)
 st.dataframe(my_meal_list)
