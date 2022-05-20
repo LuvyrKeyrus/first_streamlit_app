@@ -7,12 +7,13 @@ st.header('Liste des repas')
 my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
 meals_selected = list([])
+col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 
 
 #todo faire par jours pour sortir le tableau des repas de la semaine ensuite
-st.header("Lundi")
-lmidi = st.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
-lsoir = st.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
+col_lun.header("Lundi")
+lmidi = col_lun.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
+lsoir = col_lun.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
 
 if pd.isna(lmidi) :
     pass
@@ -25,29 +26,29 @@ else:
 #meals_selected.append(st.session_state['lun_midi'])
 #meals_selected.append(st.session_state['lun_soir'])
 
-st.header("Mardi")
-meals_selected=st.multiselect("midi :",list(my_meal_list.index),key = "mar_midi")
-meals_selected=st.multiselect("soir :",list(my_meal_list.index),key = "mar_soir")
+col_mar.header("Mardi")
+meals_selected=col_mar.multiselect("midi :",list(my_meal_list.index),key = "mar_midi")
+meals_selected=col_mar.multiselect("soir :",list(my_meal_list.index),key = "mar_soir")
 
-st.header("Mercredi")
-meals_selected=st.multiselect("midi :",list(my_meal_list.index),key = "mer_midi")
-meals_selected=st.multiselect("soir :",list(my_meal_list.index),key = "mer_soir")
+col_mer.header("Mercredi")
+meals_selected=col_mer.multiselect("midi :",list(my_meal_list.index),key = "mer_midi")
+meals_selected=col_mer.multiselect("soir :",list(my_meal_list.index),key = "mer_soir")
 
-st.header("jeudi")
-meals_selected=st.multiselect("midi :",list(my_meal_list.index),key = "jeu_midi")
-meals_selected=st.multiselect("soir :",list(my_meal_list.index),key = "jeu_soir")
+col_jeu.header("jeudi")
+meals_selected=col_jeu.multiselect("midi :",list(my_meal_list.index),key = "jeu_midi")
+meals_selected=col_jeu.multiselect("soir :",list(my_meal_list.index),key = "jeu_soir")
 
-st.header("vendredi")
-meals_selected=st.multiselect("midi :",list(my_meal_list.index),key = "ven_midi")
-meals_selected=st.multiselect("soir :",list(my_meal_list.index),key = "ven_soir")
+col_ven.header("vendredi")
+meals_selected=col_ven.multiselect("midi :",list(my_meal_list.index),key = "ven_midi")
+meals_selected=col_ven.multiselect("soir :",list(my_meal_list.index),key = "ven_soir")
 
-st.header("Samedi")
-meals_selected=st.multiselect("midi :",list(my_meal_list.index),key = "sam_midi")
-meals_selected=st.multiselect("soir :",list(my_meal_list.index),key = "sam_soir")
+col_sam.header("Samedi")
+meals_selected=col_sam.multiselect("midi :",list(my_meal_list.index),key = "sam_midi")
+meals_selected=col_sam.multiselect("soir :",list(my_meal_list.index),key = "sam_soir")
 
-st.header("dimanche")
-meals_selected=st.multiselect("midi :",list(my_meal_list.index),key = "dim_midi")
-meals_selected=st.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
+col_dim.header("dimanche")
+meals_selected=col_dim.multiselect("midi :",list(my_meal_list.index),key = "dim_midi")
+meals_selected=col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
 
 #meals_selected = st.multiselect("selection plat :",list(my_meal_list.index))
 st.text(meals_selected)
