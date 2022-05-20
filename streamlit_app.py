@@ -6,7 +6,7 @@ st.title('Application de repas')
 st.header('Liste des repas')
 my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
-meals_selected = []
+meals_selected = list([])
 
 
 #todo faire par jours pour sortir le tableau des repas de la semaine ensuite
