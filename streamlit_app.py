@@ -21,7 +21,7 @@ else:
 if pd.isna(lsoir) :
     pass
 else:
-    meals_selected.append(lsoir))  
+    meals_selected.append(lsoir)
 #meals_selected.append(st.session_state['lun_midi'])
 #meals_selected.append(st.session_state['lun_soir'])
 
