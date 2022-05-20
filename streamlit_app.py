@@ -54,7 +54,7 @@ meals_selected = meals_selected + st.session_state['dim_soir']
 
 st.text(meals_selected)
 
-for taille in len(meals_selected):
+for taille in range(len(meals_selected)):
     if taille == 0:
         meals_to_show=my_meal_list.loc[meals_selected[taille]]
     else:
