@@ -17,11 +17,11 @@ lsoir = st.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
 if pd.isna(lmidi) :
     pass
 else:
-    meals_selected.append(lmidi)
+    meals_selected = meals_selected.append(lmidi)
 if pd.isna(lsoir) :
     pass
 else:
-    meals_selected.append(lsoir)
+    meals_selected = meals_selected.append(lsoir)
 #meals_selected.append(st.session_state['lun_midi'])
 #meals_selected.append(st.session_state['lun_soir'])
 
