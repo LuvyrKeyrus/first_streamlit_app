@@ -97,6 +97,7 @@ def aff_col_repas(index_select):
 
 st.dataframe(df_produits)
 st.text(liste_produits)
+st.text(st.session_state)
 for i in range(len(liste_produits)):
 
     nom_produit = liste_produits[i]
