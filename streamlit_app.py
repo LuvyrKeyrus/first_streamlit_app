@@ -95,17 +95,18 @@ def aff_col_repas(index_select):
     col1.number_input(index_select,min_value=0, max_value=20,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
     meals_to_show['quantite'][index_select] = st.session_state[index_select]
 
-st.dataframe(df_produits)
-st.dataframe(meals_to_show)
+
+
 st.text(st.session_state)
 
 
 for z in range(len(liste_produits)):
-
+    
     nom_produit = liste_produits[z]
     quantite_produit = df_produits.loc[nom_produit,'quantite_achat']
     unite_produit = df_produits.loc[nom_produit,'unite_achat']
     aff_col_produits(nom_produit)
+    st.dataframe(df_produits)
     
     if nom_produit in liste_courses['Ingredient'].values :
         temp_index = liste_courses.index[(liste_courses['Ingredient'] == nom_produit)]
@@ -119,7 +120,7 @@ for z in range(len(liste_produits)):
 for i in range(len(liste_index)):
 
     aff_col_repas(liste_index[i])
-    
+    st.dataframe(meals_to_show)
     for y in range (1,11):
         ingredient_col = 'ingrédient_'+ str(y)
         quantite_col = 'quantite_ingredient_'+ str(y)
