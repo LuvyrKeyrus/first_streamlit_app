@@ -13,6 +13,7 @@ liste_achats = liste_achats.set_index('achats')
 meals_selected = []
 meals_to_show = pd.DataFrame()
 df_produits = pd.DataFrame()
+repas_semaine = pd.DataFrame(index=['Midi','Soir'],columns=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'])
 col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 
 col_lun.header("Lundi")
@@ -20,42 +21,57 @@ col_lun.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
 col_lun.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
 meals_selected = meals_selected + st.session_state['lun_midi']
 meals_selected = meals_selected + st.session_state['lun_soir']
+df_produits['Lundi']['Midi'] = st.session_state['lun_midi']
+df_produits['Lundi']['Soir'] = st.session_state['lun_soir']
+
 
 col_mar.header("Mardi")
 col_mar.multiselect("midi :",list(my_meal_list.index),key = "mar_midi")
 col_mar.multiselect("soir :",list(my_meal_list.index),key = "mar_soir")
 meals_selected = meals_selected + st.session_state['mar_midi']
 meals_selected = meals_selected + st.session_state['mar_soir']
+df_produits['Mardi']['Midi'] = st.session_state['mar_midi']
+df_produits['Mardi']['Soir'] = st.session_state['mar_soir']
 
 col_mer.header("Mercredi")
 col_mer.multiselect("midi :",list(my_meal_list.index),key = "mer_midi")
 col_mer.multiselect("soir :",list(my_meal_list.index),key = "mer_soir")
 meals_selected = meals_selected + st.session_state['mer_midi']
 meals_selected = meals_selected + st.session_state['mer_soir']
+df_produits['Mercredi']['Midi'] = st.session_state['mer_midi']
+df_produits['Mercredi']['Soir'] = st.session_state['mer_soir']
 
 col_jeu.header("jeudi")
 col_jeu.multiselect("midi :",list(my_meal_list.index),key = "jeu_midi")
 col_jeu.multiselect("soir :",list(my_meal_list.index),key = "jeu_soir")
 meals_selected = meals_selected + st.session_state['jeu_midi']
 meals_selected = meals_selected + st.session_state['jeu_soir']
+df_produits['Jeudi']['Midi'] = st.session_state['jeu_midi']
+df_produits['Jeudi']['Soir'] = st.session_state['jeu_soir']
 
 col_ven.header("vendredi")
 col_ven.multiselect("midi :",list(my_meal_list.index),key = "ven_midi")
 col_ven.multiselect("soir :",list(my_meal_list.index),key = "ven_soir")
 meals_selected = meals_selected + st.session_state['ven_midi']
 meals_selected = meals_selected + st.session_state['ven_soir']
+df_produits['Vendredi']['Midi'] = st.session_state['ven_midi']
+df_produits['Vendredi']['Soir'] = st.session_state['ven_soir']
 
 col_sam.header("Samedi")
 col_sam.multiselect("midi :",list(my_meal_list.index),key = "sam_midi")
 col_sam.multiselect("soir :",list(my_meal_list.index),key = "sam_soir")
 meals_selected = meals_selected + st.session_state['sam_midi']
 meals_selected = meals_selected + st.session_state['sam_soir']
+df_produits['Samedi']['Midi'] = st.session_state['sam_midi']
+df_produits['Samedi']['Soir'] = st.session_state['sam_soir']
 
 col_dim.header("dimanche")
 col_dim.multiselect("midi :",list(my_meal_list.index),key = "dim_midi")
 col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
 meals_selected = meals_selected + st.session_state['dim_midi']
 meals_selected = meals_selected + st.session_state['dim_soir']
+df_produits['Dimanche']['Midi'] = st.session_state['dim_midi']
+df_produits['Dimanche']['Soir'] = st.session_state['dim_soir']
 
 st.header('Choix des produits complémentaires')
 liste_select_achats = st.multiselect("produits :",list(liste_achats.index),key = "produits_comp")
@@ -97,9 +113,6 @@ def aff_col_repas(index_select):
 
 
 
-st.text(st.session_state)
-
-
 for z in range(len(liste_produits)):
     
     nom_produit = liste_produits[z]
@@ -116,10 +129,6 @@ for z in range(len(liste_produits)):
         st.text('dans le else')
         
         liste_courses = liste_courses.append({'Ingredient':nom_produit,'Quantite': quantite_produit * df_produits.loc[nom_produit,'quantite_achat'] ,'Unite': unite_produit}, ignore_index=True)
-st.dataframe(df_produits)
-
-
-
 
 
 for i in range(len(liste_index)):
@@ -143,7 +152,7 @@ for i in range(len(liste_index)):
             else :
                 liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val * meals_to_show.loc[liste_index[i],'quantite'] ,'Unite':unite_val}, ignore_index=True)
 
-st.dataframe(meals_to_show)
+
 indexNames = liste_courses[ liste_courses['Quantite'] == 0 ].index
 liste_courses.drop(indexNames , inplace=True)
 st.header('Liste de courses')
@@ -155,5 +164,14 @@ st.download_button(
      label="Télécharger la liste de courses",
      data=csv,
      file_name='liste_courses.csv',
+     mime='text/csv',
+ )
+
+csv2 = repas_semaine.to_csv().encode('utf-8')
+
+st.download_button(
+     label="Télécharger les repas de la semaine",
+     data=csv2,
+     file_name='repas_de_la_semaine.csv',
      mime='text/csv',
  )
