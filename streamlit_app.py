@@ -4,8 +4,12 @@ st.set_page_config(layout="wide")
 
 st.title('Application de repas')
 st.header('Liste des repas')
+
 my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
+liste_achats = pd.read_csv("Achats.csv", sep=';')
+
+
 meals_selected = []
 meals_to_show = pd.DataFrame()
 col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
@@ -52,9 +56,10 @@ col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
 meals_selected = meals_selected + st.session_state['dim_midi']
 meals_selected = meals_selected + st.session_state['dim_soir']
 
+liste_select_achats = st.multiselect("produits complémentaires :",list(liste_achats.achat),key = "produits_comp")
+df_produits = liste_achats.achats[liste_select_achats]
 
-st.text(meals_selected)
-
+st.dataframe(df_produits)
 for taille in range(len(meals_selected)):
     if meals_selected[taille] not in meals_to_show.index :
         st.text('dans le if')
@@ -62,6 +67,9 @@ for taille in range(len(meals_selected)):
     else:
         st.text('dans le else')
         meals_to_show ['quantite'][meals_selected[taille]] = meals_to_show ['quantite'][meals_selected[taille]] + 1
+
+
+
 
 coltitre1, coltitre2 = st.columns(2)
 col1, col2 = st.columns([2,2])
