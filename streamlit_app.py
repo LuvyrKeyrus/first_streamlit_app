@@ -57,7 +57,7 @@ meals_selected = meals_selected + st.session_state['dim_midi']
 meals_selected = meals_selected + st.session_state['dim_soir']
 
 st.header('Choix des produits complémentaires')
-liste_select_achats = st.multiselect("produits :",list(liste_achats.achats),key = "produits_comp")
+liste_select_achats = st.multiselect("produits :",list(liste_achats.index),key = "produits_comp")
 
 df_produits =  liste_achats[liste_achats.achats.isin(liste_select_achats)]
 
