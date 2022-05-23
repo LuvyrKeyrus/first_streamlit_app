@@ -3,7 +3,7 @@ import pandas as pd
 st.set_page_config(layout="wide")
 
 st.title('Application de repas')
-st.header('Liste des repas')
+st.header('Choix des repas')
 
 my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
@@ -56,11 +56,12 @@ col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
 meals_selected = meals_selected + st.session_state['dim_midi']
 meals_selected = meals_selected + st.session_state['dim_soir']
 
-liste_select_achats = st.multiselect("produits complémentaires :",list(liste_achats.achats),key = "produits_comp")
+st.header('Choix des produits complémentaires')
+liste_select_achats = st.multiselect("produits :",list(liste_achats.achats),key = "produits_comp")
 
 df_produits =  liste_achats[liste_achats.achats.isin(liste_select_achats)]
 
-st.dataframe(df_produits)
+
 for taille in range(len(meals_selected)):
     if meals_selected[taille] not in meals_to_show.index :
         st.text('dans le if')
@@ -72,21 +73,43 @@ for taille in range(len(meals_selected)):
 
 
 
-coltitre1, coltitre2 = st.columns(2)
 col1, col2 = st.columns([2,2])
-coltitre1.header('Repas choisis')
+col1.header('Repas choisis')
+
+col2.header('Produits complémentaires')
 
 
 liste_courses=pd.DataFrame(columns=['Ingredient','Quantite','Unite'])
-coltitre2.header('Ingredients choisis')
 
 liste_index = meals_to_show.index
+
+def aff_col_produits(index_select,nom_produit):
+    index_in = "produit_"+index_select
+    if index_in not in st.session_state:
+        st.session_state[index_in] = df_produits.loc[index_select,'quantite_achat']
+    col2.number_input(nom_produit,min_value=0, max_value=20,value = int(df_produits.loc[index_select,['quantite_achat']]),step=1,key = index_in)
+    df_produits['quantite_achat'][index_select] = st.session_state[index_in]
 
 def aff_col_repas(index_select):
     if index_select not in st.session_state:
         st.session_state[index_select] = meals_to_show.loc[index_select,'quantite']
-    col1.number_input(index_select,min_value=0, max_value=10,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
+    col1.number_input(index_select,min_value=0, max_value=20,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
     meals_to_show['quantite'][index_select] = st.session_state[index_select]
+
+for i in range(len(df_produits)):
+    nom_produit = df_produits.loc[i,'achats']
+    quantite_produit = df_produits.loc[i,'quantite_achat']
+    unite_produit = df_produits.loc[i,'unite_achat']
+    aff_col_produits(i,nom_produit)
+    
+    if nom_produit in liste_courses['Ingredient'].values :
+        temp_index = liste_courses.index[(liste_courses['Ingredient'] == nom_produit)]
+        liste_courses['Quantite'][temp_index] = df_produits.loc[i,['quantite_achat']]
+    else :
+        liste_courses = liste_courses.append({'Ingredient':nom_produit,'Quantite':quantite_produit ,'Unite': unite_produit}, ignore_index=True)
+
+
+
 
 for i in range(len(liste_index)):
 
@@ -113,7 +136,8 @@ for i in range(len(liste_index)):
 indexNames = liste_courses[ liste_courses['Quantite'] == 0 ].index
 # Delete these row indexes from dataFrame
 liste_courses.drop(indexNames , inplace=True)
-col2.dataframe(liste_courses)
+st.header('Liste de courses')
+st.dataframe(liste_courses)
 
 csv = liste_courses.to_csv().encode('utf-8')
 
