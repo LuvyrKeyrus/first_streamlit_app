@@ -113,6 +113,8 @@ for z in range(len(liste_produits)):
         liste_courses['Quantite'][temp_index] = df_produits.loc[nom_produit,['quantite_achat']]
     else :
         liste_courses = liste_courses.append({'Ingredient':nom_produit,'Quantite':quantite_produit ,'Unite': unite_produit}, ignore_index=True)
+st.dataframe(df_produits)
+
 
 
 
@@ -120,7 +122,6 @@ for z in range(len(liste_produits)):
 for i in range(len(liste_index)):
 
     aff_col_repas(liste_index[i])
-    st.dataframe(meals_to_show)
     for y in range (1,11):
         ingredient_col = 'ingrédient_'+ str(y)
         quantite_col = 'quantite_ingredient_'+ str(y)
@@ -139,7 +140,7 @@ for i in range(len(liste_index)):
             else :
                 liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val * meals_to_show.loc[liste_index[i],'quantite'] ,'Unite':unite_val}, ignore_index=True)
 
-
+st.dataframe(meals_to_show)
 indexNames = liste_courses[ liste_courses['Quantite'] == 0 ].index
 liste_courses.drop(indexNames , inplace=True)
 st.header('Liste de courses')
