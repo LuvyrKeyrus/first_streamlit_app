@@ -56,7 +56,7 @@ col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
 meals_selected = meals_selected + st.session_state['dim_midi']
 meals_selected = meals_selected + st.session_state['dim_soir']
 
-liste_select_achats = st.multiselect("produits complémentaires :",list(liste_achats.achat),key = "produits_comp")
+liste_select_achats = st.multiselect("produits complémentaires :",list(liste_achats.achats),key = "produits_comp")
 
 df_produits =  liste_achats[liste_achats.achats.isin(liste_select_achats)]
 
