@@ -158,9 +158,11 @@ liste_courses.drop(indexNames , inplace=True)
 st.header('Liste de courses')
 st.dataframe(liste_courses)
 
+col_dl1, col_dl2,col_dl3,col_dl4,col_dl5 = st.columns(5)
+
 csv = liste_courses.to_csv().encode('utf-8')
 
-st.download_button(
+col_dl2.download_button(
      label="Télécharger la liste de courses",
      data=csv,
      file_name='liste_courses.csv',
@@ -169,7 +171,7 @@ st.download_button(
 
 csv2 = repas_semaine.to_csv().encode('utf-8')
 
-st.download_button(
+col_dl4.download_button(
      label="Télécharger les repas de la semaine",
      data=csv2,
      file_name='repas_de_la_semaine.csv',
