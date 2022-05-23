@@ -110,11 +110,12 @@ for z in range(len(liste_produits)):
     if nom_produit in liste_courses['Ingredient'].values :
         st.text('dans le if')
         temp_index = liste_courses.index[(liste_courses['Ingredient'] == nom_produit)]
-        st.text(df_produits.loc[nom_produit,'quantite_achat'])
+        
         liste_courses['Quantite'][temp_index] = df_produits.loc[nom_produit,'quantite_achat']
     else :
         st.text('dans le else')
-        liste_courses = liste_courses.append({'Ingredient':nom_produit,'Quantite':quantite_produit ,'Unite': unite_produit}, ignore_index=True)
+        
+        liste_courses = liste_courses.append({'Ingredient':nom_produit,'Quantite': quantite_produit * df_produits.loc[nom_produit,'quantite_achat'] ,'Unite': unite_produit}, ignore_index=True)
 st.dataframe(df_produits)
 
 
