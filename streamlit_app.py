@@ -84,7 +84,7 @@ liste_courses=pd.DataFrame(columns=['Ingredient','Quantite','Unite'])
 liste_index = meals_to_show.index
 
 def aff_col_produits(index_select,nom_produit):
-    index_in = "produit_"+index_select
+    index_in = "produit_"+str(index_select)
     if index_in not in st.session_state:
         st.session_state[index_in] = df_produits.loc[index_select,'quantite_achat']
     col2.number_input(nom_produit,min_value=0, max_value=20,value = int(df_produits.loc[index_select,['quantite_achat']]),step=1,key = index_in)
