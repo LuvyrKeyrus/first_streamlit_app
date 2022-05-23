@@ -58,8 +58,7 @@ meals_selected = meals_selected + st.session_state['dim_soir']
 
 liste_select_achats = st.multiselect("produits complémentaires :",list(liste_achats.achat),key = "produits_comp")
 
-df_produits =  liste_achats[liste_achats['achats'].isin(liste_select_achats)]
-
+df_produits =  liste_achats[liste_achats.achats.isin(liste_select_achats)]
 
 st.dataframe(df_produits)
 for taille in range(len(meals_selected)):
