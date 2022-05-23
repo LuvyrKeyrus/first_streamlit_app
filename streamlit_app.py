@@ -12,6 +12,7 @@ liste_achats = liste_achats.set_index('achats')
 
 meals_selected = []
 meals_to_show = pd.DataFrame()
+df_produits = pd.DataFrame()
 col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 
 col_lun.header("Lundi")
