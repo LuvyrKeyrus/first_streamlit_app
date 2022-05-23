@@ -158,7 +158,7 @@ liste_courses.drop(indexNames , inplace=True)
 st.header('Liste de courses')
 st.dataframe(liste_courses)
 
-col_dl1, col_dl2,col_dl3,col_dl4,col_dl5 = st.columns(1,2,1,2,1)
+col_dl1, col_dl2,col_dl3,col_dl4,col_dl5 = st.columns([1,2,1,2,1])
 
 csv = liste_courses.to_csv().encode('utf-8')
 
