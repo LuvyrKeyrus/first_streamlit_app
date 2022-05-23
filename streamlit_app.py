@@ -83,11 +83,12 @@ liste_courses=pd.DataFrame(columns=['Ingredient','Quantite','Unite'])
 liste_produits = df_produits.index
 liste_index = meals_to_show.index
 
-def aff_col_produits(nom_produit):
-    if nom_produit not in st.session_state:
-        st.session_state[nom_produit] = df_produits.loc[nom_produit,'quantite_achat']
-    col2.number_input(nom_produit,min_value=0, max_value=20,value = int(df_produits.loc[nom_produit,['quantite_achat']]),step=1,key = nom_produit)
-    df_produits['quantite_achat'][nom_produit] = st.session_state[nom_produit]
+
+def aff_col_produits(index_select):
+    if index_select not in st.session_state:
+        st.session_state[index_select] = meals_to_show.loc[index_select,'quantite_achat']
+    col2.number_input(index_select,min_value=0, max_value=20,value = int(meals_to_show.loc[index_select,['quantite_achat']]),step=1,key = index_select)
+    meals_to_show['quantite_achat'][index_select] = st.session_state[index_select]
 
 def aff_col_repas(index_select):
     if index_select not in st.session_state:
