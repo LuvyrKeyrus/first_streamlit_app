@@ -106,7 +106,6 @@ for z in range(len(liste_produits)):
     quantite_produit = df_produits.loc[nom_produit,'quantite_achat']
     unite_produit = df_produits.loc[nom_produit,'unite_achat']
     aff_col_produits(nom_produit)
-    st.dataframe(df_produits)
     
     if nom_produit in liste_courses['Ingredient'].values :
         temp_index = liste_courses.index[(liste_courses['Ingredient'] == nom_produit)]
