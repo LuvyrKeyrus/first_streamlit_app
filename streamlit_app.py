@@ -87,7 +87,7 @@ def aff_col_produits(index_select):
     if index_select not in st.session_state:
         st.session_state[index_select] = df_produits.loc[index_select,'quantite_achat']
     col2.number_input(index_select,min_value=0, max_value=20,value = int(df_produits.loc[index_select,['quantite_achat']]),step=1,key = index_select)
-    df_produits['quantite_achat'][index_select] = st.session_state[index_select]
+    df_produits.set_value(index_select,'quantite_achat',st.session_state[index_select])
 
 def aff_col_repas(index_select):
     if index_select not in st.session_state:
@@ -96,8 +96,9 @@ def aff_col_repas(index_select):
     meals_to_show['quantite'][index_select] = st.session_state[index_select]
 
 st.dataframe(df_produits)
-st.text(liste_produits)
 st.text(st.session_state)
+
+
 for i in range(len(liste_produits)):
 
     nom_produit = liste_produits[i]
