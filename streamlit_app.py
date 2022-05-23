@@ -8,7 +8,7 @@ st.header('Choix des repas')
 my_meal_list = pd.read_csv("Repas.csv", sep=';')
 my_meal_list = my_meal_list.set_index('plats')
 liste_achats = pd.read_csv("Achats.csv", sep=';')
-
+liste_achats = liste_achats.set_index('achats')
 
 meals_selected = []
 meals_to_show = pd.DataFrame()
@@ -80,15 +80,14 @@ col2.header('Produits complémentaires')
 
 
 liste_courses=pd.DataFrame(columns=['Ingredient','Quantite','Unite'])
-
+liste_produits = df_produits.index
 liste_index = meals_to_show.index
 
-def aff_col_produits(index_select,nom_produit):
-    index_in = "produit_"+str(index_select)
-    if index_in not in st.session_state:
-        st.session_state[index_in] = df_produits.loc[index_select,'quantite_achat']
-    col2.number_input(nom_produit,min_value=0, max_value=20,value = int(df_produits.loc[index_select,['quantite_achat']]),step=1,key = index_in)
-    df_produits['quantite_achat'][index_select] = st.session_state[index_in]
+def aff_col_produits(nom_produit):
+    if nom_produit not in st.session_state:
+        st.session_state[nom_produit] = df_produits.loc[nom_produit,'quantite_achat']
+    col2.number_input(nom_produit,min_value=0, max_value=20,value = int(df_produits.loc[nom_produit,['quantite_achat']]),step=1,key = nom_produit)
+    df_produits['quantite_achat'][nom_produit] = st.session_state[nom_produit]
 
 def aff_col_repas(index_select):
     if index_select not in st.session_state:
@@ -97,19 +96,17 @@ def aff_col_repas(index_select):
     meals_to_show['quantite'][index_select] = st.session_state[index_select]
 
 st.dataframe(df_produits)
-for i in range(len(df_produits)):
+st.text(liste_produits)
+for i in range(len(liste_produits)):
 
-    nom_produit = df_produits.loc[i,'achats']
-    quantite_produit = df_produits.loc[i,'quantite_achat']
-    unite_produit = df_produits.loc[i,'unite_achat']
-    st.text(nom_produit)
-    st.text(quantite_produit)
-    st.text(unite_produit)
-    aff_col_produits(i,nom_produit)
+    nom_produit = liste_produits[i]
+    quantite_produit = df_produits.loc[nom_produit,'quantite_achat']
+    unite_produit = df_produits.loc[nom_produit,'unite_achat']
+    aff_col_produits(nom_produit)
     
     if nom_produit in liste_courses['Ingredient'].values :
         temp_index = liste_courses.index[(liste_courses['Ingredient'] == nom_produit)]
-        liste_courses['Quantite'][temp_index] = df_produits.loc[i,['quantite_achat']]
+        liste_courses['Quantite'][temp_index] = df_produits.loc[nom_produit,['quantite_achat']]
     else :
         liste_courses = liste_courses.append({'Ingredient':nom_produit,'Quantite':quantite_produit ,'Unite': unite_produit}, ignore_index=True)
 
