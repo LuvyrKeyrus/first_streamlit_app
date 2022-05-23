@@ -96,6 +96,7 @@ def aff_col_repas(index_select):
     meals_to_show['quantite'][index_select] = st.session_state[index_select]
 
 st.dataframe(df_produits)
+st.dataframe(meals_to_show)
 st.text(st.session_state)
 
 
@@ -137,15 +138,15 @@ for i in range(len(liste_index)):
             else :
                 liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val * meals_to_show.loc[liste_index[i],'quantite'] ,'Unite':unite_val}, ignore_index=True)
 
+
 indexNames = liste_courses[ liste_courses['Quantite'] == 0 ].index
-# Delete these row indexes from dataFrame
 liste_courses.drop(indexNames , inplace=True)
 st.header('Liste de courses')
 st.dataframe(liste_courses)
 
 csv = liste_courses.to_csv().encode('utf-8')
 
-col2.download_button(
+st.download_button(
      label="Télécharger la liste de courses",
      data=csv,
      file_name='liste_courses.csv',
