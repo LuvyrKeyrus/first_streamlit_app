@@ -65,10 +65,8 @@ df_produits =  liste_achats[liste_achats.index.isin(liste_select_achats)]
 
 for taille in range(len(meals_selected)):
     if meals_selected[taille] not in meals_to_show.index :
-        st.text('dans le if')
         meals_to_show=meals_to_show.append(my_meal_list.loc[meals_selected[taille]])
     else:
-        st.text('dans le else')
         meals_to_show ['quantite'][meals_selected[taille]] = meals_to_show ['quantite'][meals_selected[taille]] + 1
 
 
