@@ -105,7 +105,7 @@ for taille in range(len(meals_selected)):
         meals_to_show ['quantite'][meals_selected[taille]] = meals_to_show ['quantite'][meals_selected[taille]] + 1
 
 
-col1, col2, col3, col4,col5 = st.columns([1,2,2,2,1])
+col1, col2,col3, col4,col5 = st.columns([1,2,2,2,1])
 col2.header('Repas choisis')
 
 col4.header('Produits complémentaires')
@@ -156,17 +156,17 @@ for i in range(len(liste_index)):
             else :
                 liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val * meals_to_show.loc[liste_index[i],'quantite'] ,'Unite':unite_val}, ignore_index=True)
 
-#col_1,col_liste,col2 = st.columns(3)
+col_1,col_liste,col2 = st.columns(3)
 indexNames = liste_courses[ liste_courses['Quantite'] == 0 ].index
 liste_courses.drop(indexNames , inplace=True)
-col3.header('Liste de courses')
-col3.dataframe(liste_courses)
+col_liste.header('Liste de courses')
+col_liste.dataframe(liste_courses)
 
-#col_dl1, col_dl2,col_dl3,col_dl4,col_dl5 = st.columns([1,2,1,2,1])
+col_dl1, col_dl2,col_dl3,col_dl4,col_dl5 = st.columns([1,2,1,2,1])
 
 csv = liste_courses.to_csv(sep = ";").encode('utf-8')
 
-col2.download_button(
+col_dl2.download_button(
      label="Télécharger la liste de courses",
      data=csv,
      file_name='liste_courses.csv',
@@ -175,7 +175,7 @@ col2.download_button(
 
 csv2 = repas_semaine.to_csv(sep = ";").encode('utf-8')
 
-col4.download_button(
+col_dl4.download_button(
      label="Télécharger les repas de la semaine",
      data=csv2,
      file_name='repas_de_la_semaine.csv',
