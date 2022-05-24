@@ -9,13 +9,13 @@ def suppr_carac(string):
 def aff_col_produits(index_select):
     if index_select not in st.session_state:
         st.session_state[index_select] = df_produits.loc[index_select,'quantite_achat']
-    col2.number_input(index_select,min_value=0, max_value=20,value = int(df_produits.loc[index_select,['quantite_achat']]),step=1,key = index_select)
+    col4.number_input(index_select,min_value=0, max_value=20,value = int(df_produits.loc[index_select,['quantite_achat']]),step=1,key = index_select)
     df_produits['quantite_achat'][index_select] = st.session_state[index_select]
 
 def aff_col_repas(index_select):
     if index_select not in st.session_state:
         st.session_state[index_select] = meals_to_show.loc[index_select,'quantite']
-    col1.number_input(index_select,min_value=0, max_value=20,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
+    col2.number_input(index_select,min_value=0, max_value=20,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
     meals_to_show['quantite'][index_select] = st.session_state[index_select]
 
 st.set_page_config(layout="wide")
@@ -105,10 +105,10 @@ for taille in range(len(meals_selected)):
         meals_to_show ['quantite'][meals_selected[taille]] = meals_to_show ['quantite'][meals_selected[taille]] + 1
 
 
-col1, col2 = st.columns([2,2])
-col1.header('Repas choisis')
+col1, col2, col3, col4,col5 = st.columns([1,2,2,2,1])
+col2.header('Repas choisis')
 
-col2.header('Produits complémentaires')
+col4.header('Produits complémentaires')
 
 
 liste_courses=pd.DataFrame(columns=['Ingredient','Quantite','Unite'])
@@ -156,17 +156,17 @@ for i in range(len(liste_index)):
             else :
                 liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val * meals_to_show.loc[liste_index[i],'quantite'] ,'Unite':unite_val}, ignore_index=True)
 
-col_1,col_liste,col2 = st.columns(3)
+#col_1,col_liste,col2 = st.columns(3)
 indexNames = liste_courses[ liste_courses['Quantite'] == 0 ].index
 liste_courses.drop(indexNames , inplace=True)
-col_liste.header('Liste de courses')
-col_liste.dataframe(liste_courses)
+col3.header('Liste de courses')
+col3.dataframe(liste_courses)
 
-col_dl1, col_dl2,col_dl3,col_dl4,col_dl5 = st.columns([1,2,1,2,1])
+#col_dl1, col_dl2,col_dl3,col_dl4,col_dl5 = st.columns([1,2,1,2,1])
 
 csv = liste_courses.to_csv(sep = ";").encode('utf-8')
 
-col_dl2.download_button(
+col2.download_button(
      label="Télécharger la liste de courses",
      data=csv,
      file_name='liste_courses.csv',
@@ -175,7 +175,7 @@ col_dl2.download_button(
 
 csv2 = repas_semaine.to_csv(sep = ";").encode('utf-8')
 
-col_dl4.download_button(
+col4.download_button(
      label="Télécharger les repas de la semaine",
      data=csv2,
      file_name='repas_de_la_semaine.csv',
