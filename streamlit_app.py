@@ -36,7 +36,7 @@ repas_semaine = pd.DataFrame(index=['Midi','Soir'],columns=['Lundi','Mardi','Mer
 col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 
 col_lun.header("Lundi")
-col_lun.multiselect("midi :",list(my_meal_list.index),key = "lun_midi",help = list(my_meal_list['ingredient_1']))
+col_lun.multiselect("midi :",list(my_meal_list.index),help = str(list(my_meal_list['ingredient_1'])),key = "lun_midi")
 col_lun.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
 meals_selected = meals_selected + st.session_state['lun_midi']
 meals_selected = meals_selected + st.session_state['lun_soir']
