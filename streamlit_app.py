@@ -156,7 +156,7 @@ for i in range(len(liste_index)):
             else :
                 liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val * meals_to_show.loc[liste_index[i],'quantite'] ,'Unite':unite_val}, ignore_index=True)
 
-col_1,col_liste,col2 = st.columns([1,2,1])
+col_1,col_liste,col2 = st.columns([1,2,1],layout="centered")
 indexNames = liste_courses[ liste_courses['Quantite'] == 0 ].index
 liste_courses.drop(indexNames , inplace=True)
 col_liste.header('Liste de courses')
