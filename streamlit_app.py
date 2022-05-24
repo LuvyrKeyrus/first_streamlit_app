@@ -173,11 +173,11 @@ col_dl2.download_button(
      mime='text/csv',
  )
 
-csv2 = repas_semaine.to_csv().encode('utf-8')
+csv2 = repas_semaine.to_csv(sep = " ").encode('utf-8')
 
 col_dl4.download_button(
      label="Télécharger les repas de la semaine",
      data=csv2,
-     file_name='repas_de_la_semaine.csv',
+     file_name='repas_de_la_semaine.txt',
      mime='text/csv',
  )
