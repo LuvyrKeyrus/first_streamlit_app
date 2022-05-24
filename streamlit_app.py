@@ -22,8 +22,8 @@ col_lun.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
 col_lun.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
 meals_selected = meals_selected + st.session_state['lun_midi']
 meals_selected = meals_selected + st.session_state['lun_soir']
-repas_semaine['Lundi']['Midi'] = st.session_state['lun_midi'].replace(characters["'","]","["],"")
-repas_semaine['Lundi']['Soir'] = st.session_state['lun_soir'].replace(characters["'","]","["],"")
+repas_semaine['Lundi']['Midi'] = str(st.session_state['lun_midi']).replace(characters["'","]","["],"")
+repas_semaine['Lundi']['Soir'] = str(st.session_state['lun_soir']).replace(characters["'","]","["],"")
 
 
 col_mar.header("Mardi")
