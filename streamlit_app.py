@@ -11,6 +11,7 @@ liste_achats = pd.read_csv("Achats.csv", sep=';')
 liste_achats = liste_achats.set_index('achats')
 
 meals_selected = []
+characters = "'!?[]"
 meals_to_show = pd.DataFrame()
 df_produits = pd.DataFrame()
 repas_semaine = pd.DataFrame(index=['Midi','Soir'],columns=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'])
@@ -21,8 +22,8 @@ col_lun.multiselect("midi :",list(my_meal_list.index),key = "lun_midi")
 col_lun.multiselect("soir :",list(my_meal_list.index),key = "lun_soir")
 meals_selected = meals_selected + st.session_state['lun_midi']
 meals_selected = meals_selected + st.session_state['lun_soir']
-repas_semaine['Lundi']['Midi'] = st.session_state['lun_midi']
-repas_semaine['Lundi']['Soir'] = st.session_state['lun_soir']
+repas_semaine['Lundi']['Midi'] = st.session_state['lun_midi'].replace(characters["'","]","["],"")
+repas_semaine['Lundi']['Soir'] = st.session_state['lun_soir'].replace(characters["'","]","["],"")
 
 
 col_mar.header("Mardi")
