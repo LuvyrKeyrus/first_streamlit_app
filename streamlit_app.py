@@ -123,16 +123,9 @@ for z in range(len(liste_produits)):
     quantite_produit = df_produits.loc[nom_produit,'quantite_achat']
     unite_produit = df_produits.loc[nom_produit,'unite_achat']
     aff_col_produits(nom_produit)
-    
-    if nom_produit in liste_courses['Ingredient'].values :
-        st.text('dans le if')
-        temp_index = liste_courses.index[(liste_courses['Ingredient'] == nom_produit)]
+    st.text('dans le else')
         
-        liste_courses['Quantite'][temp_index] = df_produits.loc[nom_produit,'quantite_achat']
-    else :
-        st.text('dans le else')
-        
-        liste_courses = liste_courses.append({'Ingredient':nom_produit,'Quantite': quantite_produit * df_produits.loc[nom_produit,'quantite_achat'] ,'Unite': unite_produit}, ignore_index=True)
+    liste_courses = liste_courses.append({'Ingredient':nom_produit,'Quantite': quantite_produit * df_produits.loc[nom_produit,'quantite_achat'] ,'Unite': unite_produit}, ignore_index=True)
 
 
 for i in range(len(liste_index)):
