@@ -96,10 +96,7 @@ st.header('Choix des produits complémentaires')
 liste_select_achats = st.multiselect("produits :",list(liste_achats.index),key = "produits_comp")
 
 df_produits =  liste_achats[liste_achats.index.isin(liste_select_achats)]
-col1, col2 = st.columns([2,2])
-col1.header('Repas choisis')
-col2.header('Produits complémentaires')
-col_dl1, col_dl2,col_dl3,col_dl4,col_dl5 = st.columns([1,2,1,2,1])
+
 
 for taille in range(len(meals_selected)):
     if meals_selected[taille] not in meals_to_show.index :
@@ -108,6 +105,10 @@ for taille in range(len(meals_selected)):
         meals_to_show ['quantite'][meals_selected[taille]] = meals_to_show ['quantite'][meals_selected[taille]] + 1
 
 
+col1, col2 = st.columns([2,2])
+col1.header('Repas choisis')
+
+col2.header('Produits complémentaires')
 
 
 liste_courses=pd.DataFrame(columns=['Ingredient','Quantite','Unite'])
@@ -161,9 +162,9 @@ liste_courses.drop(indexNames , inplace=True)
 st.header('Liste de courses')
 st.dataframe(liste_courses)
 
+col_dl1, col_dl2,col_dl3,col_dl4,col_dl5 = st.columns([1,2,1,2,1])
 
-
-csv = liste_courses.to_csv().encode('utf-8')
+csv = liste_courses.to_csv(sep = ";").encode('utf-8')
 
 col_dl2.download_button(
      label="Télécharger la liste de courses",
