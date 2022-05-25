@@ -32,8 +32,7 @@ meals_selected = []
 characters = "'!?[]"
 meals_to_show = pd.DataFrame()
 df_produits = pd.DataFrame()
-df_indredients = pd.DataFrame(columns=['ingredient','quantite','unite'])
-df_indredients.set_index('ingredient')
+df_indredients = pd.DataFrame(columns=['quantite','unite'])
 repas_semaine = pd.DataFrame(index=['Midi','Soir'],columns=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'])
 col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 
@@ -189,7 +188,7 @@ for ligne in range(len(liste_index_meal_liste)):
         if pd.isna(my_meal_list.loc[liste_index_meal_liste[ligne],ingredient_col]) :
             continue
         else :
-            if ingredient_val not in df_indredients['ingredient'].values :
+            if ingredient_val not in df_indredients.index.values :
                 row = pd.Series({'quantite':0,'unite':unite_val},name=ingredient_val)
                 df_indredients = df_indredients.append(row)
             
