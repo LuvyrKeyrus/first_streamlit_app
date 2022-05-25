@@ -194,6 +194,7 @@ for ligne in range(len(liste_index_meal_liste)):
 
 selection_ingredients = st.multiselect("Ingrédients qui restent dans le frigo :",list(df_indredients['ingredient']),key = "ingredients")
 ingredients_selection_ingredients = df_indredients[df_indredients.index.isin(selection_ingredients)]
+st.dataframe(ingredients_selection_ingredients)
 def aff_col_ingredients(index_select):
     index_temp = ingredients_selection_ingredients.loc[index_select,'ingredient']
     st.text("dans la boucle")
