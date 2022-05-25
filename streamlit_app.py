@@ -234,6 +234,8 @@ if st.button('afficher quels sont les plats faisables'):
                 nombre_ingredient_theorique_recette += 1
                 for ingredient_nombre in range(len(liste_ingredients)):
                     if ingredient_val == liste_ingredients[ingredient_nombre]:
+                        st.text(quantite_col)
+                        st.text(ingredients_selection_ingredients.loc[liste_ingredients[ingredient_nombre],'quantite'])
                         if quantite_col <= ingredients_selection_ingredients.loc[liste_ingredients[ingredient_nombre],'quantite']:
                             nombre_ingredient_reel_recette += 1
                             break
