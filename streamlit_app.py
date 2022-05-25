@@ -255,6 +255,7 @@ if st.button('afficher quels sont les plats faisables'):
 
         if nombre_ingredient_theorique_recette == nombre_ingredient_reel_recette:
             st.text('la recette est gardée')
+            st.text(index_liste_complette[i])
             ingredients_selectionnes_liste = ingredients_selectionnes_liste + index_liste_complette[i]
         nombre_ingredient_reel_recette = 0
         nombre_ingredient_theorique_recette = 0
