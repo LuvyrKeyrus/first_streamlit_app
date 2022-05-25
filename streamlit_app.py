@@ -229,8 +229,10 @@ if st.button('afficher quels sont les plats faisables'):
             unite_val = my_meal_list.loc[index_liste_complette[i],unite_col]
 
             if pd.isna(my_meal_list.loc[index_liste_complette[i],ingredient_col]) :
+                st.text('cest nul')
                 continue
             else:
+                st.text('cest pas nul')
                 nombre_ingredient_theorique_recette += 1
                 for ingredient_nombre in range(len(liste_ingredients)):
                     if ingredient_val == liste_ingredients[ingredient_nombre]:
