@@ -38,6 +38,7 @@ liste_achats = pd.read_csv("Achats.csv", sep=';')
 liste_achats = liste_achats.set_index('achats')
 
 meals_selected = []
+ingredients_selectionnes_liste = []
 characters = "'!?[]"
 meals_to_show = pd.DataFrame()
 df_produits = pd.DataFrame()
@@ -209,8 +210,40 @@ for i in range(len(selection_ingredients)):
     aff_col_ingredients(selection_ingredients[i],i%2)
 
 
-st.header('Aliments dans le frigo')
 st.dataframe(ingredients_selection_ingredients)
 
+st.header('Aliments dans le frigo')
+index_liste_complette = my_meal_list.index
+liste_ingredients = ingredients_selection_ingredients.index
 if st.button('afficher quels sont les plats faisables'):
-     st.write('Why hello there')
+    nombre_ingredient_theorique_recette = 0
+    nombre_ingredient_reel_recette = 0
+    for i in range(len(index_liste_complette)):
+        for y in range (1,11):
+            ingredient_col = 'ingrédient_'+ str(y)
+            quantite_col = 'quantite_ingredient_'+ str(y)
+            unite_col = 'unité_mesure_ingredient_'+ str(y)
+            #TODO recherche parmis toutes les lignes du dataset de base si on retrouves les ingrédients qui sont dans la table ingredients_selection_ingredients.
+            ingredient_val = my_meal_list.loc[index_liste_complette[i],ingredient_col]
+            quantite_val = my_meal_list.loc[index_liste_complette[i],quantite_col]
+            unite_val = my_meal_list.loc[index_liste_complette[i],unite_col]
+
+            if pd.isna(my_meal_list.loc[index_liste_complette[i],ingredient_col]) :
+                continue
+            else:
+                nombre_ingredient_theorique_recette += 1
+                for ingredient_nombre in range(len(liste_ingredients)):
+                    if ingredient_val == liste_ingredients[ingredient_nombre]:
+                        if quantite_col <= ingredients_selection_ingredients.loc[liste_ingredients[ingredient_nombre],'quantite']:
+                            nombre_ingredient_reel_recette += 1
+                            break
+                        else:
+                            continue
+                    else :
+                        continue
+        if nombre_ingredient_theorique_recette == nombre_ingredient_reel_recette:
+            ingredients_selectionnes_liste = ingredients_selectionnes_liste + index_liste_complette[i]
+        else :
+            continue
+    df_repas_possibles = my_meal_list[my_meal_list.index.isin(ingredients_selectionnes_liste)]    
+    st.dataframe(df_repas_possibles)
