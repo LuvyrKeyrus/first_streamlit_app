@@ -60,7 +60,7 @@ meals_selected = meals_selected + st.session_state['mer_soir']
 repas_semaine['Mercredi']['Midi'] = suppr_carac(str(st.session_state['mer_midi']))
 repas_semaine['Mercredi']['Soir'] = suppr_carac(str(st.session_state['mer_soir']))
 
-col_jeu.header("jeudi")
+col_jeu.header("Jeudi")
 col_jeu.multiselect("midi :",list(my_meal_list.index),key = "jeu_midi")
 col_jeu.multiselect("soir :",list(my_meal_list.index),key = "jeu_soir")
 meals_selected = meals_selected + st.session_state['jeu_midi']
@@ -68,7 +68,7 @@ meals_selected = meals_selected + st.session_state['jeu_soir']
 repas_semaine['Jeudi']['Midi'] = suppr_carac(str(st.session_state['jeu_midi']))
 repas_semaine['Jeudi']['Soir'] = suppr_carac(str(st.session_state['jeu_soir']))
 
-col_ven.header("vendredi")
+col_ven.header("Vendredi")
 col_ven.multiselect("midi :",list(my_meal_list.index),key = "ven_midi")
 col_ven.multiselect("soir :",list(my_meal_list.index),key = "ven_soir")
 meals_selected = meals_selected + st.session_state['ven_midi']
@@ -84,7 +84,7 @@ meals_selected = meals_selected + st.session_state['sam_soir']
 repas_semaine['Samedi']['Midi'] = suppr_carac(str(st.session_state['sam_midi']))
 repas_semaine['Samedi']['Soir'] = suppr_carac(str(st.session_state['sam_soir']))
 
-col_dim.header("dimanche")
+col_dim.header("Dimanche")
 col_dim.multiselect("midi :",list(my_meal_list.index),key = "dim_midi")
 col_dim.multiselect("soir :",list(my_meal_list.index),key = "dim_soir")
 meals_selected = meals_selected + st.session_state['dim_midi']
