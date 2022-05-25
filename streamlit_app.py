@@ -190,7 +190,8 @@ for ligne in range(len(liste_index_meal_liste)):
             continue
         else :
             if ingredient_val not in df_indredients['ingredient'].values :
-                df_indredients = df_indredients.append({'ingredient': ingredient_val,'quantite':0,'unite': unite_val}, ignore_index=True)
+                row = pd.Series({'quantite':0,'unite':unite_val},name=ingredient_val)
+                df_indredients = df_indredients.append(row)
             
 
 selection_ingredients = st.multiselect("Ingrédients qui restent dans le frigo :",list(df_indredients.index),key = "ingredients")
