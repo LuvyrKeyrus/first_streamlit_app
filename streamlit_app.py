@@ -28,23 +28,24 @@ def aff_col_ingredients(index_select, i):
     ingredients_selection_ingredients['quantite'][index_select] = st.session_state[index_select]
 
 st.set_page_config(layout="wide")
+my_meal_list = pd.read_csv("Repas.csv", sep=';')
+my_meal_list = my_meal_list.set_index('plats')
+liste_achats = pd.read_csv("Achats.csv", sep=';')
+liste_achats = liste_achats.set_index('achats')
+
+meals_selected = []
+ingredients_selectionnes_liste = []
+characters = "'!?[]"
+meals_to_show = pd.DataFrame()
+df_produits = pd.DataFrame()
+df_indredients = pd.DataFrame(columns=['quantite','unite'])
+repas_semaine = pd.DataFrame(index=['Midi','Soir'],columns=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'])
+
 my_button = st.sidebar.radio("MENU", ('selection des repas','Contenu du frigo')) 
 if my_button == 'selection des repas':
     st.title('Application de repas')
     st.header('Choix des repas')
 
-    my_meal_list = pd.read_csv("Repas.csv", sep=';')
-    my_meal_list = my_meal_list.set_index('plats')
-    liste_achats = pd.read_csv("Achats.csv", sep=';')
-    liste_achats = liste_achats.set_index('achats')
-
-    meals_selected = []
-    ingredients_selectionnes_liste = []
-    characters = "'!?[]"
-    meals_to_show = pd.DataFrame()
-    df_produits = pd.DataFrame()
-    df_indredients = pd.DataFrame(columns=['quantite','unite'])
-    repas_semaine = pd.DataFrame(index=['Midi','Soir'],columns=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'])
     col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 
     col_lun.header("Lundi")
