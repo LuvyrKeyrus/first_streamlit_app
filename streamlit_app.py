@@ -33,6 +33,7 @@ characters = "'!?[]"
 meals_to_show = pd.DataFrame()
 df_produits = pd.DataFrame()
 df_indredients = pd.DataFrame(columns=['ingredient','quantite','unite'])
+df_indredients.set_index('ingredient')
 repas_semaine = pd.DataFrame(index=['Midi','Soir'],columns=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'])
 col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 
@@ -196,13 +197,12 @@ selection_ingredients = st.multiselect("Ingrédients qui restent dans le frigo :
 ingredients_selection_ingredients = df_indredients[df_indredients.index.isin(selection_ingredients)]
 st.dataframe(ingredients_selection_ingredients)
 def aff_col_ingredients(index_select):
-    index_temp = ingredients_selection_ingredients.loc[index_select,'ingredient']
     st.text("dans la boucle")
-    if index_temp not in st.session_state:
-        st.session_state[index_temp] = ingredients_selection_ingredients.loc[index_select,'quantite']
+    if index_select not in st.session_state:
+        st.session_state[index_select] = ingredients_selection_ingredients.loc[index_select,'quantite']
         st.text("création dnas le session state")
-    st.number_input(index_temp,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_temp)
-    ingredients_selection_ingredients['quantite'][index_select] = st.session_state[index_temp]
+    st.number_input(index_select,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_select)
+    ingredients_selection_ingredients['quantite'][index_select] = st.session_state[index_select]
 for i in range(len(ingredients_selection_ingredients)):
-    aff_col_ingredients(i)
+    aff_col_ingredients(ingredients_selection_ingredients[i])
 
