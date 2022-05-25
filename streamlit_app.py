@@ -185,17 +185,21 @@ for ligne in range(len(liste_index_meal_liste)):
         unite_col = 'unité_mesure_ingredient_'+ str(y)
         ingredient_val = my_meal_list.loc[liste_index_meal_liste[ligne],ingredient_col]
         unite_val = my_meal_list.loc[liste_index_meal_liste[ligne],unite_col]
-        if ingredient_val not in df_indredients['ingredient'].values :
-            df_indredients = df_indredients.append({'ingredient': ingredient_val,'quantite':0,'unite': unite_val}, ignore_index=True)
+        if pd.isna(my_meal_list.loc[liste_index_meal_liste[ligne],ingredient_col]) :
+            continue
+        else :
+            if ingredient_val not in df_indredients['ingredient'].values :
+                df_indredients = df_indredients.append({'ingredient': ingredient_val,'quantite':0,'unite': unite_val}, ignore_index=True)
             
 
 selection_ingredients = st.multiselect("Ingrédients qui restent dans le frigo :",list(df_indredients['ingredient']),key = "ingredients")
+ingredients_selection_ingredients = df_indredients[df_indredients.index.isin(selection_ingredients)]
 def aff_col_ingredients(index_select):
-    index_temp = selection_ingredients.loc[index_select,'ingredient']
+    index_temp = ingredients_selection_ingredients.loc[index_select,'ingredient']
     if index_temp not in st.session_state:
-        st.session_state[index_temp] = selection_ingredients.loc[index_select,'quantite']
-    st.number_input(index_temp,min_value=0, max_value=2000,value = int(selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_temp)
-    selection_ingredients['quantite'][index_select] = st.session_state[index_temp]
-for i in range(len(selection_ingredients)):
+        st.session_state[index_temp] = ingredients_selection_ingredients.loc[index_select,'quantite']
+    st.number_input(index_temp,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_temp)
+    ingredients_selection_ingredients['quantite'][index_select] = st.session_state[index_temp]
+for i in range(len(ingredients_selection_ingredients)):
     aff_col_ingredients(i)
 
