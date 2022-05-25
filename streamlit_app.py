@@ -219,6 +219,7 @@ if st.button('afficher quels sont les plats faisables'):
     nombre_ingredient_theorique_recette = 0
     nombre_ingredient_reel_recette = 0
     for i in range(len(index_liste_complette)):
+        st.header('nouvelle ligne de recette')
         for y in range (1,11):
             ingredient_col = 'ingrédient_'+ str(y)
             quantite_col = 'quantite_ingredient_'+ str(y)
@@ -253,6 +254,7 @@ if st.button('afficher quels sont les plats faisables'):
                 st.text('=========')
 
         if nombre_ingredient_theorique_recette == nombre_ingredient_reel_recette:
+            st.text('la recette est gardée')
             ingredients_selectionnes_liste = ingredients_selectionnes_liste + index_liste_complette[i]
         else :
             continue
