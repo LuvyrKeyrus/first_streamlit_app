@@ -212,54 +212,42 @@ for i in range(len(selection_ingredients)):
 
 st.dataframe(ingredients_selection_ingredients)
 
-st.header('Aliments dans le frigo')
 index_liste_complette = my_meal_list.index
 liste_ingredients = ingredients_selection_ingredients.index
-if st.button('afficher quels sont les plats faisables'):
-    nombre_ingredient_theorique_recette = 0
-    nombre_ingredient_reel_recette = 0
-    for i in range(len(index_liste_complette)):
-        st.header('nouvelle ligne de recette')
-        for y in range (1,11):
-            ingredient_col = 'ingrédient_'+ str(y)
-            quantite_col = 'quantite_ingredient_'+ str(y)
-            unite_col = 'unité_mesure_ingredient_'+ str(y)
-            #TODO recherche parmis toutes les lignes du dataset de base si on retrouves les ingrédients qui sont dans la table ingredients_selection_ingredients.
-            ingredient_val = my_meal_list.loc[index_liste_complette[i],ingredient_col]
-            quantite_val = my_meal_list.loc[index_liste_complette[i],quantite_col]
-            unite_val = my_meal_list.loc[index_liste_complette[i],unite_col]
+st.header('Quels sont les plats faisables ?')
+nombre_ingredient_theorique_recette = 0
+nombre_ingredient_reel_recette = 0
+for i in range(len(index_liste_complette)):
+    for y in range (1,11):
+        ingredient_col = 'ingrédient_'+ str(y)
+        quantite_col = 'quantite_ingredient_'+ str(y)
+        unite_col = 'unité_mesure_ingredient_'+ str(y)
+        #TODO recherche parmis toutes les lignes du dataset de base si on retrouves les ingrédients qui sont dans la table ingredients_selection_ingredients.
+        ingredient_val = my_meal_list.loc[index_liste_complette[i],ingredient_col]
+        quantite_val = my_meal_list.loc[index_liste_complette[i],quantite_col]
+        unite_val = my_meal_list.loc[index_liste_complette[i],unite_col]
 
-            if pd.isna(my_meal_list.loc[index_liste_complette[i],ingredient_col]) :
-                st.text('cest nul')
-                continue
-            else:
-                st.text('cest pas nul')
-                nombre_ingredient_theorique_recette += 1
-                for ingredient_nombre in range(len(liste_ingredients)):
-                    if ingredient_val == liste_ingredients[ingredient_nombre]:
-                        st.text(quantite_val)
-                        st.text(ingredients_selection_ingredients.loc[liste_ingredients[ingredient_nombre],'quantite'])
-                        if quantite_val <= ingredients_selection_ingredients.loc[liste_ingredients[ingredient_nombre],'quantite']:
-                            st.text('on ajoute un')
-                            nombre_ingredient_reel_recette += 1
-                            break
-                        else:
-                            continue
-                    else :
+        if pd.isna(my_meal_list.loc[index_liste_complette[i],ingredient_col]) :
+            continue
+        else:
+            nombre_ingredient_theorique_recette += 1
+            for ingredient_nombre in range(len(liste_ingredients)):
+                if ingredient_val == liste_ingredients[ingredient_nombre]:
+                    st.text(quantite_val)
+                    st.text(ingredients_selection_ingredients.loc[liste_ingredients[ingredient_nombre],'quantite'])
+                    if quantite_val <= ingredients_selection_ingredients.loc[liste_ingredients[ingredient_nombre],'quantite']:
+                        nombre_ingredient_reel_recette += 1
+                        break
+                    else:
                         continue
-                st.text('=========')
-                st.text('ingredients recette')
-                st.text(nombre_ingredient_theorique_recette)
-                st.text(nombre_ingredient_reel_recette)
-                st.text('=========')
+                else :
+                    continue
 
-        if nombre_ingredient_theorique_recette == nombre_ingredient_reel_recette:
-            st.text('la recette est gardée')
-            st.text(index_liste_complette[i])
-            ingredients_selectionnes_liste.append(index_liste_complette[i])
-        nombre_ingredient_reel_recette = 0
-        nombre_ingredient_theorique_recette = 0
-        
-        
-    df_repas_possibles = my_meal_list[my_meal_list.index.isin(ingredients_selectionnes_liste)]    
-    st.dataframe(df_repas_possibles)
+if nombre_ingredient_theorique_recette == nombre_ingredient_reel_recette:
+    ingredients_selectionnes_liste.append(index_liste_complette[i])
+nombre_ingredient_reel_recette = 0
+nombre_ingredient_theorique_recette = 0
+
+
+df_repas_possibles = my_meal_list[my_meal_list.index.isin(ingredients_selectionnes_liste)]    
+st.dataframe(df_repas_possibles)
