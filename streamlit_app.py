@@ -32,6 +32,7 @@ meals_selected = []
 characters = "'!?[]"
 meals_to_show = pd.DataFrame()
 df_produits = pd.DataFrame()
+df_indredients = pd.DataFrame(columns=['ingredient','quantite','unite'])
 repas_semaine = pd.DataFrame(index=['Midi','Soir'],columns=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'])
 col_lun, col_mar, col_mer, col_jeu, col_ven, col_sam, col_dim = st.columns(7)
 
@@ -174,3 +175,26 @@ col_dl4.download_button(
      file_name='repas_de_la_semaine.csv',
      mime='text/csv',
  )
+
+st.title('Frigo')
+st.header('Choix des repas')
+
+for ligne in range(len(my_meal_list)):
+    for y in range (1,11):
+        ingredient_col = 'ingrédient_'+ str(y)
+        ingredient_val = my_meal_list.loc[my_meal_list[ligne],ingredient_col]
+        unite_val = meals_to_show.loc[liste_index[i],unite_col]
+        if ingredient_val not in df_indredients['ingredient'].values :
+            df_indredients = df_indredients.append({'ingredient': ingredient_val,'quantite':0,'unite': unite_val}, ignore_index=True)
+            
+
+selection_ingredients = st.multiselect("Ingrédients qui restent dans le frigo :",list(df_indredients['ingredient']),key = "ingredients")
+def aff_col_ingredients(index_select):
+    index_temp = selection_ingredients.loc[index_select,'ingredient']
+    if index_temp not in st.session_state:
+        st.session_state[index_temp] = selection_ingredients.loc[index_select,'quantite']
+    st.number_input(index_temp,min_value=0, max_value=2000,value = int(selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_temp)
+    selection_ingredients['quantite'][index_select] = st.session_state[index_temp]
+for i in range(len(selection_ingredients)):
+    aff_col_ingredients(i)
+
