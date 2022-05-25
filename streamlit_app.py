@@ -239,6 +239,7 @@ if st.button('afficher quels sont les plats faisables'):
                         st.text(quantite_val)
                         st.text(ingredients_selection_ingredients.loc[liste_ingredients[ingredient_nombre],'quantite'])
                         if quantite_val <= ingredients_selection_ingredients.loc[liste_ingredients[ingredient_nombre],'quantite']:
+                            st.text('on ajoute un')
                             nombre_ingredient_reel_recette += 1
                             break
                         else:
