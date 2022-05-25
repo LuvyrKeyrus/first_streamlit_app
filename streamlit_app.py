@@ -18,6 +18,15 @@ def aff_col_repas(index_select):
     col2.number_input(index_select,min_value=0, max_value=20,value = int(meals_to_show.loc[index_select,['quantite']]),step=1,key = index_select)
     meals_to_show['quantite'][index_select] = st.session_state[index_select]
 
+def aff_col_ingredients(index_select, i):
+    if index_select not in st.session_state:
+        st.session_state[index_select] = ingredients_selection_ingredients.loc[index_select,'quantite']
+    if i ==0 :
+        col_ing_1.number_input(index_select,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_select)
+    if i ==1 :
+        col_ing_2.number_input(index_select,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_select)
+    ingredients_selection_ingredients['quantite'][index_select] = st.session_state[index_select]
+
 st.set_page_config(layout="wide")
 
 st.title('Application de repas')
@@ -177,7 +186,6 @@ col_dl4.download_button(
  )
 
 st.title('Frigo')
-st.header('Choix des repas')
 liste_index_meal_liste = my_meal_list.index
 for ligne in range(len(liste_index_meal_liste)):
     for y in range (1,11):
@@ -196,18 +204,13 @@ for ligne in range(len(liste_index_meal_liste)):
 selection_ingredients = st.multiselect("Ingrédients qui restent dans le frigo :",list(df_indredients.index),key = "ingredients")
 col_ing_1, col_ing_2 = st.columns(2)
 ingredients_selection_ingredients = df_indredients[df_indredients.index.isin(selection_ingredients)]
-def aff_col_ingredients(index_select, i):
-    if index_select not in st.session_state:
-        st.session_state[index_select] = ingredients_selection_ingredients.loc[index_select,'quantite']
-    if i ==0 :
-        col_ing_1.number_input(index_select,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_select)
-    if i ==1 :
-        col_ing_2.number_input(index_select,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_select)
-    ingredients_selection_ingredients['quantite'][index_select] = st.session_state[index_select]
+
 for i in range(len(selection_ingredients)):
-    st.text(i%2)
     aff_col_ingredients(selection_ingredients[i],i%2)
 
 
-
+st.header('Aliments dans le frigo')
 st.dataframe(ingredients_selection_ingredients)
+
+if st.button('afficher quels sont les plats faisables'):
+     st.write('Why hello there')
