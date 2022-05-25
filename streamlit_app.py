@@ -136,8 +136,6 @@ if my_button == 'selection des repas':
         quantite_produit = df_produits.loc[nom_produit,'quantite_achat']
         unite_produit = df_produits.loc[nom_produit,'unite_achat']
         aff_col_produits(nom_produit)
-        st.text('dans le else')
-            
         liste_courses = liste_courses.append({'Ingredient':nom_produit,'Quantite': quantite_produit * df_produits.loc[nom_produit,'quantite_achat'] ,'Unite': unite_produit}, ignore_index=True)
 
 
@@ -162,7 +160,7 @@ if my_button == 'selection des repas':
                 else :
                     liste_courses = liste_courses.append({'Ingredient':ingredient_val,'Quantite':quantite_val * meals_to_show.loc[liste_index[i],'quantite'] ,'Unite':unite_val}, ignore_index=True)
 
-    col_1,col_liste,col2 = st.columns([1,5,1])
+    col_1,col_liste,col2 = st.columns([1,2,1])
     indexNames = liste_courses[ liste_courses['Quantite'] == 0 ].index
     liste_courses.drop(indexNames , inplace=True)
     col_liste.header('Liste de courses')
