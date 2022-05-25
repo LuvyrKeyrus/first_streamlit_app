@@ -212,7 +212,7 @@ if my_button == 'Contenu du frigo':
 
     st.dataframe(ingredients_selection_ingredients)
 
-    st.header('Aliments dans le frigo')
+    st.header('Plats réalisables avec les ingrédients du frigo')
     index_liste_complette = my_meal_list.index
     liste_ingredients = ingredients_selection_ingredients.index
     if st.button('afficher quels sont les plats faisables'):
