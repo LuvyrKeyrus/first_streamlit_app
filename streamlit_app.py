@@ -193,7 +193,7 @@ for ligne in range(len(liste_index_meal_liste)):
                 df_indredients = df_indredients.append({'ingredient': ingredient_val,'quantite':0,'unite': unite_val}, ignore_index=True)
             
 
-selection_ingredients = st.multiselect("Ingrédients qui restent dans le frigo :",list(df_indredients['ingredient']),key = "ingredients")
+selection_ingredients = st.multiselect("Ingrédients qui restent dans le frigo :",list(df_indredients.index),key = "ingredients")
 st.text(selection_ingredients)
 ingredients_selection_ingredients = df_indredients[df_indredients.index.isin(selection_ingredients)]
 st.dataframe(ingredients_selection_ingredients)
