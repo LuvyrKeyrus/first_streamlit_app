@@ -256,9 +256,9 @@ if st.button('afficher quels sont les plats faisables'):
         if nombre_ingredient_theorique_recette == nombre_ingredient_reel_recette:
             st.text('la recette est gardée')
             ingredients_selectionnes_liste = ingredients_selectionnes_liste + index_liste_complette[i]
-        else :
-            continue
         nombre_ingredient_reel_recette = 0
         nombre_ingredient_theorique_recette = 0
+        
+        
     df_repas_possibles = my_meal_list[my_meal_list.index.isin(ingredients_selectionnes_liste)]    
     st.dataframe(df_repas_possibles)
