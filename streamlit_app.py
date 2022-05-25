@@ -196,8 +196,10 @@ selection_ingredients = st.multiselect("Ingrédients qui restent dans le frigo :
 ingredients_selection_ingredients = df_indredients[df_indredients.index.isin(selection_ingredients)]
 def aff_col_ingredients(index_select):
     index_temp = ingredients_selection_ingredients.loc[index_select,'ingredient']
+    st.text("dans la boucle")
     if index_temp not in st.session_state:
         st.session_state[index_temp] = ingredients_selection_ingredients.loc[index_select,'quantite']
+        st.text("création dnas le session state")
     st.number_input(index_temp,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_temp)
     ingredients_selection_ingredients['quantite'][index_select] = st.session_state[index_temp]
 for i in range(len(ingredients_selection_ingredients)):
