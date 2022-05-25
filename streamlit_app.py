@@ -192,8 +192,9 @@ for ligne in range(len(liste_index_meal_liste)):
                 row = pd.Series({'quantite':0,'unite':unite_val},name=ingredient_val)
                 df_indredients = df_indredients.append(row)
             
-col_ing_1, col_ing_2 = st.columns(2)
+
 selection_ingredients = st.multiselect("Ingrédients qui restent dans le frigo :",list(df_indredients.index),key = "ingredients")
+col_ing_1, col_ing_2 = st.columns(2)
 ingredients_selection_ingredients = df_indredients[df_indredients.index.isin(selection_ingredients)]
 def aff_col_ingredients(index_select, i):
     if index_select not in st.session_state:
