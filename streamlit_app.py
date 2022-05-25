@@ -244,6 +244,7 @@ if st.button('afficher quels sont les plats faisables'):
                     else :
                         continue
                 st.text('=========')
+                st.text('ingredients recette')
                 st.text(nombre_ingredient_theorique_recette)
                 st.text(nombre_ingredient_reel_recette)
                 st.text('=========')
