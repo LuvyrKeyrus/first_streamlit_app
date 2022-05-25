@@ -198,7 +198,10 @@ ingredients_selection_ingredients = df_indredients[df_indredients.index.isin(sel
 def aff_col_ingredients(index_select, i):
     if index_select not in st.session_state:
         st.session_state[index_select] = ingredients_selection_ingredients.loc[index_select,'quantite']
-    st.number_input(index_select,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_select)
+    if i ==0 :
+        col_ing_1.number_input(index_select,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_select)
+    if i ==1 :
+        col_ing_2.number_input(index_select,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_select)
     ingredients_selection_ingredients['quantite'][index_select] = st.session_state[index_select]
 for i in range(len(selection_ingredients)):
     st.text(i%2)
