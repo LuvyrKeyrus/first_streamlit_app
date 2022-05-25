@@ -196,15 +196,14 @@ for ligne in range(len(liste_index_meal_liste)):
 selection_ingredients = st.multiselect("Ingrédients qui restent dans le frigo :",list(df_indredients.index),key = "ingredients")
 st.text(selection_ingredients)
 ingredients_selection_ingredients = df_indredients[df_indredients.index.isin(selection_ingredients)]
-st.dataframe(ingredients_selection_ingredients)
 def aff_col_ingredients(index_select):
-    st.text("dans la boucle")
     if index_select not in st.session_state:
         st.session_state[index_select] = ingredients_selection_ingredients.loc[index_select,'quantite']
-        st.text("création dnas le session state")
     st.number_input(index_select,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_select)
     ingredients_selection_ingredients['quantite'][index_select] = st.session_state[index_select]
 for i in range(len(selection_ingredients)):
     st.text(selection_ingredients[i])
     aff_col_ingredients(selection_ingredients[i])
 
+
+st.dataframe(ingredients_selection_ingredients)
