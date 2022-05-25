@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from streamlit_option_menu import option_menu
 
 def suppr_carac(string):
     characters = "'[]"
@@ -26,7 +27,10 @@ def aff_col_ingredients(index_select, i):
     if i ==1 :
         col_ing_2.number_input(index_select,min_value=0, max_value=2000,value = int(ingredients_selection_ingredients.loc[index_select,['quantite']]),step=1,key = index_select)
     ingredients_selection_ingredients['quantite'][index_select] = st.session_state[index_select]
-
+with st.sidebar:
+    selected = option_menu("Main Menu", ["Home", 'Settings'], 
+        icons=['house', 'gear'], menu_icon="cast", default_index=1)
+    selected
 st.set_page_config(layout="wide")
 
 st.title('Application de repas')
