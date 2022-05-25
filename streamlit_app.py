@@ -243,6 +243,11 @@ if st.button('afficher quels sont les plats faisables'):
                             continue
                     else :
                         continue
+                st.text('=========')
+                st.text(nombre_ingredient_theorique_recette)
+                st.text(nombre_ingredient_reel_recette)
+                st.text('=========')
+
         if nombre_ingredient_theorique_recette == nombre_ingredient_reel_recette:
             ingredients_selectionnes_liste = ingredients_selectionnes_liste + index_liste_complette[i]
         else :
