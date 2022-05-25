@@ -178,13 +178,13 @@ col_dl4.download_button(
 
 st.title('Frigo')
 st.header('Choix des repas')
-
-for ligne in range(len(my_meal_list)):
+liste_index_meal_liste = my_meal_list.index
+for ligne in range(len(liste_index_meal_liste)):
     for y in range (1,11):
         ingredient_col = 'ingrédient_'+ str(y)
         unite_col = 'unité_mesure_ingredient_'+ str(y)
-        ingredient_val = my_meal_list.loc[my_meal_list[ligne],ingredient_col]
-        unite_val = my_meal_list.loc[my_meal_list[ligne],unite_col]
+        ingredient_val = my_meal_list.loc[liste_index_meal_liste[ligne],ingredient_col]
+        unite_val = my_meal_list.loc[liste_index_meal_liste[ligne],unite_col]
         if ingredient_val not in df_indredients['ingredient'].values :
             df_indredients = df_indredients.append({'ingredient': ingredient_val,'quantite':0,'unite': unite_val}, ignore_index=True)
             
